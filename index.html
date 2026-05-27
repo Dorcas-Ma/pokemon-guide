@@ -1,15 +1,204 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>测试页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>究极绿宝石小智版 宝可梦攻略站</title>
     <style>
-        body { text-align: center; margin-top: 200px; font-family: "微软雅黑", sans-serif; }
-        h1 { color: #2d6a4f; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "微软雅黑", sans-serif; }
+        body { background: #fff; color: #333; }
+        .page { display: none; padding: 20px; min-height: 100vh; }
+        .page.show { display: block; }
+        .home {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+        .btn {
+            padding: 16px 40px;
+            font-size: 20px;
+            background: #2d6a4f;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        .back-btn {
+            padding: 8px 20px;
+            background: #2d6a4f;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #f0f9f4;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #2d6a4f;
+        }
+        .card img {
+            width: 80px;
+            height: 80px;
+            background: #fff;
+            border-radius: 8px;
+            padding: 4px;
+            object-fit: contain;
+        }
+        .detail-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #f0f9f4;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #2d6a4f;
+        }
+        .detail-top {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .detail-img {
+            width: 200px;
+            height: 200px;
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            object-fit: contain;
+        }
+        .info { margin: 8px 0; font-size: 15px; }
+        .info strong { color: #2d6a4f; }
     </style>
 </head>
 <body>
-    <h1>✅ 网站部署成功！</h1>
-    <p>如果看到这句话，说明网站是正常的。</p>
+<!-- 背景音乐：国内稳定CDN，点击页面播放 -->
+<audio id="bgm" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop>
+
+<!-- 首页 -->
+<div id="page1" class="page show">
+    <div class="home">
+        <h1>究极绿宝石小智版 宝可梦攻略站</h1>
+        <button class="btn" onclick="go(2)">进入攻略</button>
+    </div>
+</div>
+
+<!-- 列表页 -->
+<div id="page2" class="page">
+    <button class="back-btn" onclick="go(1)">返回首页</button>
+    <h2 style="text-align:center; margin-bottom:20px; color:#2d6a4f;">综合强度 TOP30</h2>
+    <div class="grid" id="list"></div>
+</div>
+
+<!-- 详情页 -->
+<div id="page3" class="page">
+    <button class="back-btn" onclick="go(2)">返回列表</button>
+    <div class="detail-box">
+        <div class="detail-top">
+            <img class="detail-img" id="dimg">
+            <div>
+                <h2 id="dname" style="color:#2d6a4f; margin-bottom:15px;"></h2>
+                <div class="info"><strong>性格：</strong><span id="dnature"></span></div>
+                <div class="info"><strong>特性：</strong><span id="dability"></span></div>
+                <div class="info"><strong>技能：</strong><span id="dskill"></span></div>
+                <div class="info"><strong>道具：</strong><span id="ditem"></span></div>
+                <div class="info"><strong>玩法：</strong><span id="dplay"></span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// 宝可梦数据（30只 + 国内可访问图片）
+const data = [
+{rank:1,name:"烈空坐",img:"https://s.4kdongman.com/files/2022-03-24/1648108081302438.png",nature:"爽朗",ability:"天气锁",skill:"画龙点睛+神速+地震+龙舞",item:"烈空坐超级石",play:"龙舞强化推队，版本最强"},
+{rank:2,name:"超梦",img:"https://s.4kdongman.com/files/2022-03-24/1648108100193399.png",nature:"胆小",ability:"压迫感",skill:"精神冲击+影子球+冥想",item:"超梦进化石",play:"高速特攻炮台"},
+{rank:3,name:"盖欧卡",img:"https://s.4kdongman.com/files/2022-03-24/1648108117302700.png",nature:"内敛",ability:"降雨",skill:"水炮+打雷+冰冻光束",item:"潮湿岩石",play:"雨天队核心"},
+{rank:4,name:"固拉多",img:"https://s.4kdongman.com/files/2022-03-24/1648108136194301.png",nature:"固执",ability:"日照",skill:"断崖之剑+闪焰冲锋+剑舞",item:"炽热岩石",play:"晴天队核心"},
+{rank:5,name:"烈咬陆鲨",img:"https://s.4kdongman.com/files/2022-03-24/1648108154303102.png",nature:"爽朗",ability:"沙隐",skill:"地震+龙爪+剑舞",item:"超级石",play:"沙暴队强力物攻手"},
+{rank:6,name:"班吉拉",img:"https://s.4kdongman.com/files/2022-03-24/1648108172194703.png",nature:"固执",ability:"扬沙",skill:"石刃+地震+龙爪+剑舞",item:"超级石",play:"沙暴队核心"},
+{rank:7,name:"沙奈朵",img:"https://s.4kdongman.com/files/2022-03-24/1648108190303504.png",nature:"内敛",ability:"同步",skill:"月亮之力+精神强念+冥想",item:"超级石",play:"龙系杀手"},
+{rank:8,name:"七夕青鸟",img:"https://s.4kdongman.com/files/2022-03-24/1648108208195105.png",nature:"大胆",ability:"自然恢复",skill:"龙星群+月亮之力+羽栖",item:"超级石",play:"肉盾辅助"},
+{rank:9,name:"喷火龙Y",img:"https://s.4kdongman.com/files/2022-03-24/1648108226303906.png",nature:"胆小",ability:"太阳之力",skill:"热风+空气斩+阳光烈焰",item:"喷火龙Y石",play:"晴天队速攻手"},
+{rank:10,name:"巨金怪",img:"https://s.4kdongman.com/files/2022-03-24/1648108244195507.png",nature:"固执",ability:"净体",skill:"彗星拳+子弹拳+地震",item:"超级石",play:"钢系强力物攻手"},
+{rank:11,name:"路卡利欧",img:"https://s.4kdongman.com/files/2022-03-24/1648108262304308.png",nature:"固执",ability:"不屈之心",skill:"近身战+波导弹+剑舞",item:"超级石",play:"高速双刀手"},
+{rank:12,name:"耿鬼",img:"https://s.4kdongman.com/files/2022-03-24/1648108280195909.png",nature:"胆小",ability:"诅咒身躯",skill:"影子球+污泥波+催眠术",item:"超级石",play:"高速控场"},
+{rank:13,name:"暴飞龙",img:"https://s.4kdongman.com/files/2022-03-24/1648108298304710.png",nature:"爽朗",ability:"威吓",skill:"龙爪+地震+龙舞",item:"超级石",play:"龙舞推队"},
+{rank:14,name:"水箭龟",img:"https://s.4kdongman.com/files/2022-03-24/1648108316196311.png",nature:"保守",ability:"激流",skill:"水炮+冰冻光束+高速旋转",item:"超级石",play:"水系清钉手"},
+{rank:15,name:"妙蛙花",img:"https://s.4kdongman.com/files/2022-03-24/1648108334305112.png",nature:"大胆",ability:"叶绿素",skill:"花瓣舞+污泥炸弹+光合作用",item:"超级石",play:"晴天队辅助"},
+{rank:16,name:"甲贺忍蛙",img:"https://s.4kdongman.com/files/2022-03-24/1648108352196713.png",nature:"胆小",ability:"变幻自在",skill:"水手里剑+冰冻光束+恶之波动",item:"生命玉",play:"高速收割"},
+{rank:17,name:"胡地",img:"https://s.4kdongman.com/files/2022-03-24/1648108370305514.png",nature:"胆小",ability:"同步",skill:"精神强念+影子球+冥想",item:"超级石",play:"极限速攻"},
+{rank:18,name:"巨钳螳螂",img:"https://s.4kdongman.com/files/2022-03-24/1648108388197115.png",nature:"固执",ability:"技术高手",skill:"子弹拳+剑舞+羽栖",item:"超级石",play:"先制收割"},
+{rank:19,name:"卡比兽",img:"https://s.4kdongman.com/files/2022-03-24/1648108406305916.png",nature:"固执",ability:"厚脂肪",skill:"泰山压顶+咬碎+腹鼓",item:"剩饭",play:"肉盾强杀"},
+{rank:20,name:"美纳斯",img:"https://s.4kdongman.com/files/2022-03-24/1648108424197517.png",nature:"沉着",ability:"神秘鳞片",skill:"热水+冰冻光束+自我再生",item:"剩饭",play:"特防消耗"},
+{rank:21,name:"波士可多拉",img:"https://s.4kdongman.com/files/2022-03-24/16481084423063118.png",nature:"固执",ability:"坚硬",skill:"铁尾+地震+剑舞",item:"超级石",play:"物防坦克"},
+{rank:22,name:"天蝎王",img:"https://s.4kdongman.com/files/2022-03-24/1648108460197919.png",nature:"爽朗",ability:"毒疗",skill:"地震+剑舞+守住",item:"剧毒珠",play:"无限续航"},
+{rank:23,name:"蜥蜴王",img:"https://s.4kdongman.com/files/2022-03-24/1648108478306720.png",nature:"爽朗",ability:"叶绿素",skill:"叶刃+地震+剑舞",item:"超级石",play:"晴天高速手"},
+{rank:24,name:"电击魔兽",img:"https://s.4kdongman.com/files/2022-03-24/1648108496198321.png",nature:"固执",ability:"电气引擎",skill:"雷电拳+地震+剑舞",item:"生命玉",play:"电系高速手"},
+{rank:25,name:"仙子伊布",img:"https://s.4kdongman.com/files/2022-03-24/1648108514307122.png",nature:"内敛",ability:"妖精皮肤",skill:"月亮之力+精神冲击+冥想",item:"妖精石板",play:"专治龙系"},
+{rank:26,name:"快龙",img:"https://s.4kdongman.com/files/2022-03-24/1648108532198723.png",nature:"爽朗",ability:"多重鳞片",skill:"龙爪+地震+羽栖",item:"剩饭",play:"全能主力"},
+{rank:27,name:"乘龙",img:"https://s.4kdongman.com/files/2022-03-24/1648108550307524.png",nature:"内敛",ability:"储水",skill:"冲浪+冰冻光束+打雷",item:"剩饭",play:"辅助控场"},
+{rank:28,name:"水晶灯火灵",img:"https://s.4kdongman.com/files/2022-03-24/1648108568199125.png",nature:"内敛",ability:"引火",skill:"喷射火焰+影子球+冥想",item:"剩饭",play:"特攻炮台"},
+{rank:29,name:"沙漠蜻蜓",img:"https://s.4kdongman.com/files/2022-03-24/1648108586307926.png",nature:"爽朗",ability:"浮游",skill:"地震+龙爪+剑舞",item:"剩饭",play:"免疫地面"},
+{rank:30,name:"艾路雷朵",img:"https://s.4kdongman.com/files/2022-03-24/1648108604199527.png",nature:"固执",ability:"正义之心",skill:"近身战+精神利刃+剑舞",item:"超级石",play:"恶系克星"}
+];
+
+// 页面切换
+function go(n) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('show'));
+    document.getElementById('page'+n).classList.add('show');
+}
+
+// 加载列表
+function loadList() {
+    let html = '';
+    data.forEach((p, i) => {
+        html += `
+        <div class="card" onclick="openDetail(${i})">
+            <div style="color:#2d6a4f;">TOP${p.rank}</div>
+            <img src="${p.img}" alt="${p.name}">
+            <div>${p.name}</div>
+        </div>`;
+    });
+    document.getElementById('list').innerHTML = html;
+}
+
+// 打开详情
+function openDetail(i) {
+    const d = data[i];
+    document.getElementById('dimg').src = d.img;
+    document.getElementById('dname').innerText = d.name;
+    document.getElementById('dnature').innerText = d.nature;
+    document.getElementById('dability').innerText = d.ability;
+    document.getElementById('dskill').innerText = d.skill;
+    document.getElementById('ditem').innerText = d.item;
+    document.getElementById('dplay').innerText = d.play;
+    go(3);
+}
+
+// 点击页面播放音乐
+document.addEventListener('click', function playBGM() {
+    document.getElementById('bgm').play().catch(e => {});
+    document.removeEventListener('click', playBGM);
+});
+
+// 页面加载完成后执行
+window.onload = function() {
+    loadList();
+}
+</script>
 </body>
 </html>
