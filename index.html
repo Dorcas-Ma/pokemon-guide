@@ -6,9 +6,16 @@
     <title>究极绿宝石小智版 宝可梦攻略站</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: "微软雅黑", sans-serif; }
-        body { background: #fff; color: #333; }
+
+        /* 这里改成墨绿色 #003300，文字白色，保证看清 */
+        body {
+            background-color: #003300; /* 墨绿色 */
+            color: #fff; /* 白色字 */
+        }
+
         .page { display: none; padding: 20px; min-height: 100vh; }
         .page.show { display: block; }
+
         .home {
             height: 100vh;
             display: flex;
@@ -17,6 +24,7 @@
             justify-content: center;
             gap: 30px;
         }
+
         .btn {
             padding: 16px 40px;
             font-size: 20px;
@@ -26,6 +34,7 @@
             border-radius: 12px;
             cursor: pointer;
         }
+
         .back-btn {
             padding: 8px 20px;
             background: #2d6a4f;
@@ -35,6 +44,7 @@
             margin-bottom: 20px;
             cursor: pointer;
         }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -42,6 +52,7 @@
             max-width: 1100px;
             margin: 0 auto;
         }
+
         .card {
             background: #f0f9f4;
             padding: 12px;
@@ -49,7 +60,9 @@
             text-align: center;
             cursor: pointer;
             border: 1px solid #2d6a4f;
+            color: #333; /* 卡片内文字深色 */
         }
+
         .card img {
             width: 80px;
             height: 80px;
@@ -58,6 +71,7 @@
             padding: 4px;
             object-fit: contain;
         }
+
         .detail-box {
             max-width: 800px;
             margin: 0 auto;
@@ -65,13 +79,16 @@
             padding: 25px;
             border-radius: 15px;
             border: 1px solid #2d6a4f;
+            color: #333;
         }
+
         .detail-top {
             display: flex;
             gap: 30px;
             align-items: center;
             flex-wrap: wrap;
         }
+
         .detail-img {
             width: 200px;
             height: 200px;
@@ -80,12 +97,12 @@
             padding: 15px;
             object-fit: contain;
         }
+
         .info { margin: 8px 0; font-size: 15px; }
         .info strong { color: #2d6a4f; }
     </style>
 </head>
 <body>
-<!-- 背景音乐：国内稳定CDN，点击页面播放 -->
 <audio id="bgm" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop>
 
 <!-- 首页 -->
@@ -99,7 +116,7 @@
 <!-- 列表页 -->
 <div id="page2" class="page">
     <button class="back-btn" onclick="go(1)">返回首页</button>
-    <h2 style="text-align:center; margin-bottom:20px; color:#2d6a4f;">综合强度 TOP30</h2>
+    <h2 style="text-align:center; margin-bottom:20px; color:#f0f9f4;">综合强度 TOP30</h2>
     <div class="grid" id="list"></div>
 </div>
 
@@ -122,7 +139,6 @@
 </div>
 
 <script>
-// 宝可梦数据（30只 + 国内可访问图片）
 const data = [
 {rank:1,name:"烈空坐",img:"https://s.4kdongman.com/files/2022-03-24/1648108081302438.png",nature:"爽朗",ability:"天气锁",skill:"画龙点睛+神速+地震+龙舞",item:"烈空坐超级石",play:"龙舞强化推队，版本最强"},
 {rank:2,name:"超梦",img:"https://s.4kdongman.com/files/2022-03-24/1648108100193399.png",nature:"胆小",ability:"压迫感",skill:"精神冲击+影子球+冥想",item:"超梦进化石",play:"高速特攻炮台"},
@@ -156,13 +172,11 @@ const data = [
 {rank:30,name:"艾路雷朵",img:"https://s.4kdongman.com/files/2022-03-24/1648108604199527.png",nature:"固执",ability:"正义之心",skill:"近身战+精神利刃+剑舞",item:"超级石",play:"恶系克星"}
 ];
 
-// 页面切换
 function go(n) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('show'));
     document.getElementById('page'+n).classList.add('show');
 }
 
-// 加载列表
 function loadList() {
     let html = '';
     data.forEach((p, i) => {
@@ -176,7 +190,6 @@ function loadList() {
     document.getElementById('list').innerHTML = html;
 }
 
-// 打开详情
 function openDetail(i) {
     const d = data[i];
     document.getElementById('dimg').src = d.img;
@@ -189,13 +202,11 @@ function openDetail(i) {
     go(3);
 }
 
-// 点击页面播放音乐
 document.addEventListener('click', function playBGM() {
     document.getElementById('bgm').play().catch(e => {});
     document.removeEventListener('click', playBGM);
 });
 
-// 页面加载完成后执行
 window.onload = function() {
     loadList();
 }
