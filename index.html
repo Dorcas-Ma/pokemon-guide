@@ -7,7 +7,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: "微软雅黑", sans-serif; }
         body {
-            background-color: #003300; /* 墨绿色背景 */
+            background-color: #003300;
             color: #fff;
             padding: 20px;
         }
@@ -30,6 +30,7 @@
             text-align: center;
             color: #333;
             border: 1px solid #2d6a4f;
+            cursor: pointer;
         }
         .card img {
             width: 80px;
@@ -44,180 +45,305 @@
             font-weight: bold;
             margin-bottom: 5px;
         }
-        audio {
-            display: block;
-            margin: 40px auto;
-            width: 300px;
+        /* 详情弹窗样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.show { display: flex; }
+        .modal-content {
+            background: #f0f9f4;
+            color: #333;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            text-align: center;
+        }
+        .modal-content img {
+            width: 150px;
+            height: 150px;
+            background: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+        .modal-content h2 {
+            color: #2d6a4f;
+            margin-bottom: 15px;
+        }
+        .close-btn {
+            margin-top: 20px;
+            padding: 8px 20px;
+            background: #2d6a4f;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <h1>究极绿宝石小智版 宝可梦攻略站</h1>
 
-    <div class="grid">
-        <!-- TOP1-30 宝可梦列表，图片全部换成GitHub可访问CDN -->
-        <div class="card">
+    <div class="grid" id="cardGrid">
+        <!-- TOP1 -->
+        <div class="card" onclick="openModal(0)">
             <div class="rank">TOP1</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/384.png" alt="烈空坐">
             <div>烈空坐</div>
         </div>
-        <div class="card">
+        <!-- TOP2 -->
+        <div class="card" onclick="openModal(1)">
             <div class="rank">TOP2</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png" alt="超梦">
             <div>超梦</div>
         </div>
-        <div class="card">
+        <!-- TOP3 -->
+        <div class="card" onclick="openModal(2)">
             <div class="rank">TOP3</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/382.png" alt="盖欧卡">
             <div>盖欧卡</div>
         </div>
-        <div class="card">
+        <!-- TOP4 -->
+        <div class="card" onclick="openModal(3)">
             <div class="rank">TOP4</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/383.png" alt="固拉多">
             <div>固拉多</div>
         </div>
-        <div class="card">
+        <!-- TOP5 -->
+        <div class="card" onclick="openModal(4)">
             <div class="rank">TOP5</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/445.png" alt="烈咬陆鲨">
             <div>烈咬陆鲨</div>
         </div>
-        <div class="card">
+        <!-- TOP6 -->
+        <div class="card" onclick="openModal(5)">
             <div class="rank">TOP6</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/248.png" alt="班吉拉">
             <div>班吉拉</div>
         </div>
-        <div class="card">
+        <!-- TOP7 -->
+        <div class="card" onclick="openModal(6)">
             <div class="rank">TOP7</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/282.png" alt="沙奈朵">
             <div>沙奈朵</div>
         </div>
-        <div class="card">
+        <!-- TOP8 -->
+        <div class="card" onclick="openModal(7)">
             <div class="rank">TOP8</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/334.png" alt="七夕青鸟">
             <div>七夕青鸟</div>
         </div>
-        <div class="card">
+        <!-- TOP9 -->
+        <div class="card" onclick="openModal(8)">
             <div class="rank">TOP9</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="喷火龙Y">
             <div>喷火龙Y</div>
         </div>
-        <div class="card">
+        <!-- TOP10 -->
+        <div class="card" onclick="openModal(9)">
             <div class="rank">TOP10</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/376.png" alt="巨金怪">
             <div>巨金怪</div>
         </div>
-        <div class="card">
+        <!-- TOP11 -->
+        <div class="card" onclick="openModal(10)">
             <div class="rank">TOP11</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png" alt="路卡利欧">
             <div>路卡利欧</div>
         </div>
-        <div class="card">
+        <!-- TOP12 -->
+        <div class="card" onclick="openModal(11)">
             <div class="rank">TOP12</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png" alt="耿鬼">
             <div>耿鬼</div>
         </div>
-        <div class="card">
+        <!-- TOP13 -->
+        <div class="card" onclick="openModal(12)">
             <div class="rank">TOP13</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/373.png" alt="暴飞龙">
             <div>暴飞龙</div>
         </div>
-        <div class="card">
+        <!-- TOP14 -->
+        <div class="card" onclick="openModal(13)">
             <div class="rank">TOP14</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png" alt="水箭龟">
-            <div>水箭鬼</div>
+            <div>水箭龟</div>
         </div>
-        <div class="card">
+        <!-- TOP15 -->
+        <div class="card" onclick="openModal(14)">
             <div class="rank">TOP15</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" alt="妙蛙花">
             <div>妙蛙花</div>
         </div>
-        <div class="card">
+        <!-- TOP16 -->
+        <div class="card" onclick="openModal(15)">
             <div class="rank">TOP16</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/658.png" alt="甲贺忍蛙">
             <div>甲贺忍蛙</div>
         </div>
-        <div class="card">
+        <!-- TOP17 -->
+        <div class="card" onclick="openModal(16)">
             <div class="rank">TOP17</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/65.png" alt="胡地">
             <div>胡地</div>
         </div>
-        <div class="card">
+        <!-- TOP18 -->
+        <div class="card" onclick="openModal(17)">
             <div class="rank">TOP18</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/212.png" alt="巨钳螳螂">
             <div>巨钳螳螂</div>
         </div>
-        <div class="card">
+        <!-- TOP19 -->
+        <div class="card" onclick="openModal(18)">
             <div class="rank">TOP19</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png" alt="卡比兽">
             <div>卡比兽</div>
         </div>
-        <div class="card">
+        <!-- TOP20 -->
+        <div class="card" onclick="openModal(19)">
             <div class="rank">TOP20</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/350.png" alt="美纳斯">
             <div>美纳斯</div>
         </div>
-        <div class="card">
+        <!-- TOP21 -->
+        <div class="card" onclick="openModal(20)">
             <div class="rank">TOP21</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/306.png" alt="波士可多拉">
             <div>波士可多拉</div>
         </div>
-        <div class="card">
+        <!-- TOP22 -->
+        <div class="card" onclick="openModal(21)">
             <div class="rank">TOP22</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/472.png" alt="天蝎王">
             <div>天蝎王</div>
         </div>
-        <div class="card">
+        <!-- TOP23 -->
+        <div class="card" onclick="openModal(22)">
             <div class="rank">TOP23</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/254.png" alt="蜥蜴王">
             <div>蜥蜴王</div>
         </div>
-        <div class="card">
+        <!-- TOP24 -->
+        <div class="card" onclick="openModal(23)">
             <div class="rank">TOP24</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/466.png" alt="电击魔兽">
             <div>电击魔兽</div>
         </div>
-        <div class="card">
+        <!-- TOP25 -->
+        <div class="card" onclick="openModal(24)">
             <div class="rank">TOP25</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/700.png" alt="仙子伊布">
             <div>仙子伊布</div>
         </div>
-        <div class="card">
+        <!-- TOP26 -->
+        <div class="card" onclick="openModal(25)">
             <div class="rank">TOP26</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png" alt="快龙">
             <div>快龙</div>
         </div>
-        <div class="card">
+        <!-- TOP27 -->
+        <div class="card" onclick="openModal(26)">
             <div class="rank">TOP27</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/131.png" alt="乘龙">
             <div>乘龙</div>
         </div>
-        <div class="card">
+        <!-- TOP28 -->
+        <div class="card" onclick="openModal(27)">
             <div class="rank">TOP28</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/609.png" alt="水晶灯火灵">
             <div>水晶灯火灵</div>
         </div>
-        <div class="card">
+        <!-- TOP29 -->
+        <div class="card" onclick="openModal(28)">
             <div class="rank">TOP29</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/330.png" alt="沙漠蜻蜓">
             <div>沙漠蜻蜓</div>
         </div>
-        <div class="card">
+        <!-- TOP30 -->
+        <div class="card" onclick="openModal(29)">
             <div class="rank">TOP30</div>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/475.png" alt="艾路雷朵">
             <div>艾路雷朵</div>
         </div>
     </div>
 
-    <!-- 音乐：自动播放+循环，同时加了controls兜底 -->
-    <audio id="bgm" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop autoplay muted controls>
-</body>
+    <!-- 详情弹窗 -->
+    <div class="modal" id="detailModal">
+        <div class="modal-content">
+            <img id="modalImg" src="" alt="">
+            <h2 id="modalName"></h2>
+            <p id="modalInfo"></p>
+            <button class="close-btn" onclick="closeModal()">关闭</button>
+        </div>
+    </div>
+
+    <!-- 隐藏的背景音乐播放器 -->
+    <audio id="bgm" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop>
 
 <script>
-    // 点击任意位置播放音乐，绕过自动播放限制
+    // 宝可梦详情数据
+    const pokemonData = [
+        {name:"烈空坐",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/384.png",info:"性格：爽朗 | 特性：天气锁 | 技能：画龙点睛+神速+地震+龙舞 | 道具：烈空坐超级石 | 玩法：龙舞强化推队，版本最强"},
+        {name:"超梦",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",info:"性格：胆小 | 特性：压迫感 | 技能：精神冲击+影子球+冥想 | 道具：超梦进化石 | 玩法：高速特攻炮台"},
+        {name:"盖欧卡",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/382.png",info:"性格：内敛 | 特性：降雨 | 技能：水炮+打雷+冰冻光束 | 道具：潮湿岩石 | 玩法：雨天队核心"},
+        {name:"固拉多",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/383.png",info:"性格：固执 | 特性：日照 | 技能：断崖之剑+闪焰冲锋+剑舞 | 道具：炽热岩石 | 玩法：晴天队核心"},
+        {name:"烈咬陆鲨",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/445.png",info:"性格：爽朗 | 特性：沙隐 | 技能：地震+龙爪+剑舞 | 道具：超级石 | 玩法：沙暴队强力物攻手"},
+        {name:"班吉拉",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/248.png",info:"性格：固执 | 特性：扬沙 | 技能：石刃+地震+龙爪+剑舞 | 道具：超级石 | 玩法：沙暴队核心"},
+        {name:"沙奈朵",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/282.png",info:"性格：内敛 | 特性：同步 | 技能：月亮之力+精神强念+冥想 | 道具：超级石 | 玩法：龙系杀手"},
+        {name:"七夕青鸟",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/334.png",info:"性格：大胆 | 特性：自然恢复 | 技能：龙星群+月亮之力+羽栖 | 道具：超级石 | 玩法：肉盾辅助"},
+        {name:"喷火龙Y",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",info:"性格：胆小 | 特性：太阳之力 | 技能：热风+空气斩+阳光烈焰 | 道具：喷火龙Y石 | 玩法：晴天队速攻手"},
+        {name:"巨金怪",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/376.png",info:"性格：固执 | 特性：净体 | 技能：彗星拳+子弹拳+地震 | 道具：超级石 | 玩法：钢系强力物攻手"},
+        {name:"路卡利欧",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png",info:"性格：固执 | 特性：不屈之心 | 技能：近身战+波导弹+剑舞 | 道具：超级石 | 玩法：高速双刀手"},
+        {name:"耿鬼",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png",info:"性格：胆小 | 特性：诅咒身躯 | 技能：影子球+污泥波+催眠术 | 道具：超级石 | 玩法：高速控场"},
+        {name:"暴飞龙",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/373.png",info:"性格：爽朗 | 特性：威吓 | 技能：龙爪+地震+龙舞 | 道具：超级石 | 玩法：龙舞推队"},
+        {name:"水箭龟",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",info:"性格：保守 | 特性：激流 | 技能：水炮+冰冻光束+高速旋转 | 道具：超级石 | 玩法：水系清钉手"},
+        {name:"妙蛙花",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",info:"性格：大胆 | 特性：叶绿素 | 技能：花瓣舞+污泥炸弹+光合作用 | 道具：超级石 | 玩法：晴天队辅助"},
+        {name:"甲贺忍蛙",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/658.png",info:"性格：胆小 | 特性：变幻自在 | 技能：水手里剑+冰冻光束+恶之波动 | 道具：生命玉 | 玩法：高速收割"},
+        {name:"胡地",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/65.png",info:"性格：胆小 | 特性：同步 | 技能：精神强念+影子球+冥想 | 道具：超级石 | 玩法：极限速攻"},
+        {name:"巨钳螳螂",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/212.png",info:"性格：固执 | 特性：技术高手 | 技能：子弹拳+剑舞+羽栖 | 道具：超级石 | 玩法：先制收割"},
+        {name:"卡比兽",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png",info:"性格：固执 | 特性：厚脂肪 | 技能：泰山压顶+咬碎+腹鼓 | 道具：剩饭 | 玩法：肉盾强杀"},
+        {name:"美纳斯",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/350.png",info:"性格：沉着 | 特性：神秘鳞片 | 技能：热水+冰冻光束+自我再生 | 道具：剩饭 | 玩法：特防消耗"},
+        {name:"波士可多拉",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/306.png",info:"性格：固执 | 特性：坚硬 | 技能：铁尾+地震+剑舞 | 道具：超级石 | 玩法：物防坦克"},
+        {name:"天蝎王",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/472.png",info:"性格：爽朗 | 特性：毒疗 | 技能：地震+剑舞+守住 | 道具：剧毒珠 | 玩法：无限续航"},
+        {name:"蜥蜴王",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/254.png",info:"性格：爽朗 | 特性：叶绿素 | 技能：叶刃+地震+剑舞 | 道具：超级石 | 玩法：晴天高速手"},
+        {name:"电击魔兽",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/466.png",info:"性格：固执 | 特性：电气引擎 | 技能：雷电拳+地震+剑舞 | 道具：生命玉 | 玩法：电系高速手"},
+        {name:"仙子伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/700.png",info:"性格：内敛 | 特性：妖精皮肤 | 技能：月亮之力+精神冲击+冥想 | 道具：妖精石板 | 玩法：专治龙系"},
+        {name:"快龙",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png",info:"性格：爽朗 | 特性：多重鳞片 | 技能：龙爪+地震+羽栖 | 道具：剩饭 | 玩法：全能主力"},
+        {name:"乘龙",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/131.png",info:"性格：内敛 | 特性：储水 | 技能：冲浪+冰冻光束+打雷 | 道具：剩饭 | 玩法：辅助控场"},
+        {name:"水晶灯火灵",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/609.png",info:"性格：内敛 | 特性：引火 | 技能：喷射火焰+影子球+冥想 | 道具：剩饭 | 玩法：特攻炮台"},
+        {name:"沙漠蜻蜓",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/330.png",info:"性格：爽朗 | 特性：浮游 | 技能：地震+龙爪+剑舞 | 道具：剩饭 | 玩法：免疫地面"},
+        {name:"艾路雷朵",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/475.png",info:"性格：固执 | 特性：正义之心 | 技能：近身战+精神利刃+剑舞 | 道具：超级石 | 玩法：恶系克星"}
+    ];
+
+    // 打开详情弹窗
+    function openModal(index) {
+        const data = pokemonData[index];
+        document.getElementById('modalImg').src = data.img;
+        document.getElementById('modalName').innerText = data.name;
+        document.getElementById('modalInfo').innerText = data.info;
+        document.getElementById('detailModal').classList.add('show');
+    }
+
+    // 关闭弹窗
+    function closeModal() {
+        document.getElementById('detailModal').classList.remove('show');
+    }
+
+    // 点击页面播放音乐（隐藏播放器）
     document.addEventListener('click', function playBGM() {
         const audio = document.getElementById('bgm');
         audio.play().catch(e => {});
         document.removeEventListener('click', playBGM);
     });
 </script>
+</body>
 </html>
