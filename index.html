@@ -3,383 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>究极绿宝石小智版 宝可梦攻略站</title>
+    <title>究极绿宝石小智版 - 宝可梦攻略站</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "微软雅黑", sans-serif; }
-        /* 全局黑色背景 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", "微软雅黑", sans-serif;
+        }
+
         body {
-            background-color: #000000;
+            background: #000;
             color: #fff;
             padding: 20px;
+            background-attachment: fixed;
         }
-        /* 页面切换 */
-        .page { display: none; }
-        .page.active { display: block; }
 
-        /* 首页样式 */
-        .home h1 {
-            text-align: center;
-            margin: 40px 0;
-            color: #98d8aa;
-            font-size: 28px;
+        /* 页面切换 */
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease;
         }
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 首页标题 */
+        .home-title {
+            text-align: center;
+            font-size: 36px;
+            color: #00ff9d;
+            margin: 40px 0 50px;
+            text-shadow: 0 0 15px #00ff9d88;
+            letter-spacing: 2px;
+        }
+
+        /* 卡片网格 */
         .grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 18px;
-            max-width: 1400px; /* 加宽页面 */
+            gap: 20px;
+            max-width: 1500px;
             margin: 0 auto;
         }
+
+        /* 卡片美化 */
         .card {
-            background: #f0f9f4;
-            padding: 15px;
-            border-radius: 12px;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 20px;
             text-align: center;
-            color: #333;
-            border: 1px solid #2d6a4f;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s;
+            box-shadow: 0 0 12px #00000088;
         }
-        .card:hover { transform: scale(1.03); }
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #00ff9d;
+            box-shadow: 0 0 25px #00ff9d44;
+            background: #151515;
+        }
         .card img {
-            width: 85px;
-            height: 85px;
-            background: #fff;
-            border-radius: 8px;
-            padding: 4px;
+            width: 90px;
+            height: 90px;
             object-fit: contain;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 8px;
+            margin-bottom: 12px;
         }
         .card .rank {
-            color: #2d6a4f;
+            color: #00ff9d;
             font-weight: bold;
-            margin-bottom: 6px;
             font-size: 16px;
+            margin-bottom: 6px;
+        }
+        .card div {
+            color: #eee;
+            font-size: 15px;
         }
 
-        /* 详情页 - 加宽主体容器 */
+        /* 详情页容器 */
         .detail-page {
-            max-width: 1000px; /* 大幅加宽页面 */
+            max-width: 1000px;
             margin: 0 auto;
             background: #111;
-            color: #eee;
-            padding: 40px;
-            border-radius: 18px;
-            border: 1px solid #2d6a4f;
+            border-radius: 20px;
+            padding: 50px;
+            border: 1px solid #222;
+            box-shadow: 0 0 40px #000000aa;
         }
-        .detail-page .back-btn {
-            margin-bottom: 25px;
-            padding: 10px 24px;
-            background: #2d6a4f;
-            color: #fff;
+
+        /* 返回按钮 */
+        .back-btn {
+            padding: 12px 26px;
+            background: #00ff9d;
+            color: #000;
+            font-weight: bold;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
             font-size: 16px;
-        }
-        .detail-page .header {
-            text-align: center;
             margin-bottom: 30px;
+            transition: 0.2s;
         }
-        .detail-page .header img {
-            width: 180px;
-            height: 180px;
-            background: #fff;
-            border-radius: 12px;
-            padding: 12px;
-            object-fit: contain;
-            margin-bottom: 18px;
-        }
-        .detail-page .header h2 {
-            color: #98d8aa;
-            font-size: 26px;
+        .back-btn:hover {
+            background: #00e68c;
         }
 
-        /* 习性板块（上方区域） */
-        .habit-block {
+        /* 详情头部 */
+        .detail-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .detail-header img {
+            width: 200px;
+            height: 200px;
             background: #1a1a1a;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 30px;
+            border-radius: 20px;
+            padding: 15px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+        .detail-header h2 {
+            font-size: 36px;
+            color: #00ff9d;
+            text-shadow: 0 0 12px #00ff9d66;
+        }
+
+        /* 习性模块（上） */
+        .habit-box {
+            background: #151515;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 35px;
+            border: 1px solid #222;
+        }
+        .habit-box h3 {
+            color: #00ff9d;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        .habit-box p {
+            font-size: 17px;
+            line-height: 1.9;
+            color: #ddd;
+        }
+
+        /* 攻略模块（下） */
+        .info-box {
+            background: #151515;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 35px;
+            border: 1px solid #222;
+        }
+        .info-item {
+            margin: 18px 0;
+            font-size: 17px;
             line-height: 1.8;
         }
-        .habit-block h3 {
-            color: #98d8aa;
-            margin-bottom: 12px;
-            font-size: 20px;
-        }
-
-        /* 攻略信息板块（下方区域） */
-        .info-wrap {
-            background: #1a1a1a;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-        }
-        .info-block {
-            margin: 16px 0;
-            font-size: 17px;
-            line-height: 1.7;
-        }
-        .info-block strong {
-            color: #98d8aa;
+        .info-item strong {
+            color: #00ff9d;
+            width: 110px;
             display: inline-block;
-            width: 90px;
+            font-weight: 600;
         }
 
         /* 评论区 */
         .comment-section {
-            border-top: 1px solid #333;
-            padding-top: 25px;
+            border-top: 1px solid #222;
+            padding-top: 35px;
         }
         .comment-section h3 {
-            color: #98d8aa;
-            margin-bottom: 18px;
-            font-size: 20px;
+            color: #00ff9d;
+            font-size: 22px;
+            margin-bottom: 20px;
         }
         .comment-input {
             width: 100%;
-            padding: 12px;
-            background: #1a1a1a;
+            height: 110px;
+            background: #151515;
+            border: 1px solid #222;
+            border-radius: 14px;
+            padding: 16px;
             color: #fff;
-            border: 1px solid #2d6a4f;
-            border-radius: 8px;
-            margin-bottom: 12px;
             font-size: 16px;
-            resize: vertical;
-            min-height: 80px;
+            resize: none;
+            margin-bottom: 14px;
         }
         .submit-btn {
-            padding: 10px 24px;
-            background: #2d6a4f;
-            color: #fff;
+            padding: 12px 26px;
+            background: #00ff9d;
+            color: #000;
+            font-weight: bold;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
             font-size: 16px;
+            transition: 0.2s;
+        }
+        .submit-btn:hover {
+            background: #00e68c;
         }
         .comment-list {
-            margin-top: 22px;
+            margin-top: 25px;
         }
         .comment-item {
-            background: #1a1a1a;
-            padding: 14px;
-            border-radius: 8px;
-            margin-bottom: 12px;
+            background: #151515;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 14px;
+            border-left: 4px solid #00ff9d;
             line-height: 1.7;
-            border-left: 3px solid #2d6a4f;
+            color: #eee;
         }
     </style>
 </head>
+
 <body>
-    <!-- 首页列表页 -->
-    <div id="homePage" class="page active">
-        <div class="home">
-            <h1>究极绿宝石小智版 宝可梦攻略站</h1>
-            <div class="grid" id="cardGrid">
-                <div class="card" onclick="goToDetail(0)">
-                    <div class="rank">TOP1</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/384.png" alt="烈空坐">
-                    <div>烈空坐</div>
-                </div>
-                <div class="card" onclick="goToDetail(1)">
-                    <div class="rank">TOP2</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png" alt="超梦">
-                    <div>超梦</div>
-                </div>
-                <div class="card" onclick="goToDetail(2)">
-                    <div class="rank">TOP3</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/382.png" alt="盖欧卡">
-                    <div>盖欧卡</div>
-                </div>
-                <div class="card" onclick="goToDetail(3)">
-                    <div class="rank">TOP4</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/383.png" alt="固拉多">
-                    <div>固拉多</div>
-                </div>
-                <div class="card" onclick="goToDetail(4)">
-                    <div class="rank">TOP5</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/445.png" alt="烈咬陆鲨">
-                    <div>烈咬陆鲨</div>
-                </div>
-                <div class="card" onclick="goToDetail(5)">
-                    <div class="rank">TOP6</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/248.png" alt="班吉拉">
-                    <div>班吉拉</div>
-                </div>
-                <div class="card" onclick="goToDetail(6)">
-                    <div class="rank">TOP7</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/282.png" alt="沙奈朵">
-                    <div>沙奈朵</div>
-                </div>
-                <div class="card" onclick="goToDetail(7)">
-                    <div class="rank">TOP8</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/334.png" alt="七夕青鸟">
-                    <div>七夕青鸟</div>
-                </div>
-                <div class="card" onclick="goToDetail(8)">
-                    <div class="rank">TOP9</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="喷火龙Y">
-                    <div>喷火龙Y</div>
-                </div>
-                <div class="card" onclick="goToDetail(9)">
-                    <div class="rank">TOP10</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/376.png" alt="巨金怪">
-                    <div>巨金怪</div>
-                </div>
-                <div class="card" onclick="goToDetail(10)">
-                    <div class="rank">TOP11</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png" alt="路卡利欧">
-                    <div>路卡利欧</div>
-                </div>
-                <div class="card" onclick="goToDetail(11)">
-                    <div class="rank">TOP12</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png" alt="耿鬼">
-                    <div>耿鬼</div>
-                </div>
-                <div class="card" onclick="goToDetail(12)">
-                    <div class="rank">TOP13</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/373.png" alt="暴飞龙">
-                    <div>暴飞龙</div>
-                </div>
-                <div class="card" onclick="goToDetail(13)">
-                    <div class="rank">TOP14</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png" alt="水箭龟">
-                    <div>水箭龟</div>
-                </div>
-                <div class="card" onclick="goToDetail(14)">
-                    <div class="rank">TOP15</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png" alt="妙蛙花">
-                    <div>妙蛙花</div>
-                </div>
-                <div class="card" onclick="goToDetail(15)">
-                    <div class="rank">TOP16</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/658.png" alt="甲贺忍蛙">
-                    <div>甲贺忍蛙</div>
-                </div>
-                <div class="card" onclick="goToDetail(16)">
-                    <div class="rank">TOP17</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/65.png" alt="胡地">
-                    <div>胡地</div>
-                </div>
-                <div class="card" onclick="goToDetail(17)">
-                    <div class="rank">TOP18</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/212.png" alt="巨钳螳螂">
-                    <div>巨钳螳螂</div>
-                </div>
-                <div class="card" onclick="goToDetail(18)">
-                    <div class="rank">TOP19</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png" alt="卡比兽">
-                    <div>卡比兽</div>
-                </div>
-                <div class="card" onclick="goToDetail(19)">
-                    <div class="rank">TOP20</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/350.png" alt="美纳斯">
-                    <div>美纳斯</div>
-                </div>
-                <div class="card" onclick="goToDetail(20)">
-                    <div class="rank">TOP21</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/306.png" alt="波士可多拉">
-                    <div>波士可多拉</div>
-                </div>
-                <div class="card" onclick="goToDetail(21)">
-                    <div class="rank">TOP22</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/472.png" alt="天蝎王">
-                    <div>天蝎王</div>
-                </div>
-                <div class="card" onclick="goToDetail(22)">
-                    <div class="rank">TOP23</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/254.png" alt="蜥蜴王">
-                    <div>蜥蜴王</div>
-                </div>
-                <div class="card" onclick="goToDetail(23)">
-                    <div class="rank">TOP24</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/466.png" alt="电击魔兽">
-                    <div>电击魔兽</div>
-                </div>
-                <div class="card" onclick="goToDetail(24)">
-                    <div class="rank">TOP25</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/700.png" alt="仙子伊布">
-                    <div>仙子伊布</div>
-                </div>
-                <div class="card" onclick="goToDetail(25)">
-                    <div class="rank">TOP26</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png" alt="快龙">
-                    <div>快龙</div>
-                </div>
-                <div class="card" onclick="goToDetail(26)">
-                    <div class="rank">TOP27</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/131.png" alt="乘龙">
-                    <div>乘龙</div>
-                </div>
-                <div class="card" onclick="goToDetail(27)">
-                    <div class="rank">TOP28</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/609.png" alt="水晶灯火灵">
-                    <div>水晶灯火灵</div>
-                </div>
-                <div class="card" onclick="goToDetail(28)">
-                    <div class="rank">TOP29</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/330.png" alt="沙漠蜻蜓">
-                    <div>沙漠蜻蜓</div>
-                </div>
-                <div class="card" onclick="goToDetail(29)">
-                    <div class="rank">TOP30</div>
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/475.png" alt="艾路雷朵">
-                    <div>艾路雷朵</div>
-                </div>
-            </div>
+
+<!-- 首页 -->
+<div id="homePage" class="page active">
+    <h1 class="home-title">究极绿宝石小智版 · 宝可梦全攻略</h1>
+    <div class="grid">
+
+        <div class="card" onclick="goToDetail(0)"><div class="rank">TOP1</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/384.png"><div>烈空坐</div></div>
+        <div class="card" onclick="goToDetail(1)"><div class="rank">TOP2</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png"><div>超梦</div></div>
+        <div class="card" onclick="goToDetail(2)"><div class="rank">TOP3</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/382.png"><div>盖欧卡</div></div>
+        <div class="card" onclick="goToDetail(3)"><div class="rank">TOP4</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/383.png"><div>固拉多</div></div>
+        <div class="card" onclick="goToDetail(4)"><div class="rank">TOP5</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/445.png"><div>烈咬陆鲨</div></div>
+        <div class="card" onclick="goToDetail(5)"><div class="rank">TOP6</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/248.png"><div>班吉拉</div></div>
+        <div class="card" onclick="goToDetail(6)"><div class="rank">TOP7</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/282.png"><div>沙奈朵</div></div>
+        <div class="card" onclick="goToDetail(7)"><div class="rank">TOP8</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/334.png"><div>七夕青鸟</div></div>
+        <div class="card" onclick="goToDetail(8)"><div class="rank">TOP9</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"><div>喷火龙Y</div></div>
+        <div class="card" onclick="goToDetail(9)"><div class="rank">TOP10</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/376.png"><div>巨金怪</div></div>
+        <div class="card" onclick="goToDetail(10)"><div class="rank">TOP11</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png"><div>路卡利欧</div></div>
+        <div class="card" onclick="goToDetail(11)"><div class="rank">TOP12</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png"><div>耿鬼</div></div>
+        <div class="card" onclick="goToDetail(12)"><div class="rank">TOP13</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/373.png"><div>暴飞龙</div></div>
+        <div class="card" onclick="goToDetail(13)"><div class="rank">TOP14</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png"><div>水箭龟</div></div>
+        <div class="card" onclick="goToDetail(14)"><div class="rank">TOP15</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"><div>妙蛙花</div></div>
+        <div class="card" onclick="goToDetail(15)"><div class="rank">TOP16</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/658.png"><div>甲贺忍蛙</div></div>
+        <div class="card" onclick="goToDetail(16)"><div class="rank">TOP17</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/65.png"><div>胡地</div></div>
+        <div class="card" onclick="goToDetail(17)"><div class="rank">TOP18</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/212.png"><div>巨钳螳螂</div></div>
+        <div class="card" onclick="goToDetail(18)"><div class="rank">TOP19</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png"><div>卡比兽</div></div>
+        <div class="card" onclick="goToDetail(19)"><div class="rank">TOP20</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/350.png"><div>美纳斯</div></div>
+        <div class="card" onclick="goToDetail(20)"><div class="rank">TOP21</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/306.png"><div>波士可多拉</div></div>
+        <div class="card" onclick="goToDetail(21)"><div class="rank">TOP22</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/472.png"><div>天蝎王</div></div>
+        <div class="card" onclick="goToDetail(22)"><div class="rank">TOP23</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/254.png"><div>蜥蜴王</div></div>
+        <div class="card" onclick="goToDetail(23)"><div class="rank">TOP24</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/466.png"><div>电击魔兽</div></div>
+        <div class="card" onclick="goToDetail(24)"><div class="rank">TOP25</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/700.png"><div>仙子伊布</div></div>
+        <div class="card" onclick="goToDetail(25)"><div class="rank">TOP26</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png"><div>快龙</div></div>
+        <div class="card" onclick="goToDetail(26)"><div class="rank">TOP27</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/131.png"><div>乘龙</div></div>
+        <div class="card" onclick="goToDetail(27)"><div class="rank">TOP28</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/609.png"><div>水晶灯火灵</div></div>
+        <div class="card" onclick="goToDetail(28)"><div class="rank">TOP29</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/330.png"><div>沙漠蜻蜓</div></div>
+        <div class="card" onclick="goToDetail(29)"><div class="rank">TOP30</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/475.png"><div>艾路雷朵</div></div>
+
+    </div>
+</div>
+
+<!-- 详情页 -->
+<div id="detailPage" class="page">
+    <div class="detail-page">
+        <button class="back-btn" onclick="goBack()">← 返回列表</button>
+
+        <div class="detail-header">
+            <img id="detailImg" src="">
+            <h2 id="detailName"></h2>
+        </div>
+
+        <!-- 习性（上） -->
+        <div class="habit-box">
+            <h3>📖 基础习性</h3>
+            <p id="detailHabit"></p>
+        </div>
+
+        <!-- 攻略（下） -->
+        <div class="info-box">
+            <div class="info-item"><strong>推荐性格</strong><span id="detailNature"></span></div>
+            <div class="info-item"><strong>专属特性</strong><span id="detailAbility"></span></div>
+            <div class="info-item"><strong>招式搭配</strong><span id="detailMoves"></span></div>
+            <div class="info-item"><strong>推荐道具</strong><span id="detailItem"></span></div>
+            <div class="info-item"><strong>实战玩法</strong><span id="detailPlay"></span></div>
+        </div>
+
+        <!-- 评论 -->
+        <div class="comment-section">
+            <h3>💬 玩家评论</h3>
+            <textarea class="comment-input" id="commentInput" placeholder="分享你的玩法心得..."></textarea>
+            <button class="submit-btn" onclick="addComment()">发表评论</button>
+            <div class="comment-list" id="commentList"></div>
         </div>
     </div>
+</div>
 
-    <!-- 详情页：上=习性 下=攻略 -->
-    <div id="detailPage" class="page">
-        <div class="detail-page">
-            <button class="back-btn" onclick="goBack()">返回列表</button>
-            <div class="header">
-                <img id="detailImg" src="" alt="">
-                <h2 id="detailName"></h2>
-            </div>
-
-            <!-- 上方：宝可梦习性 -->
-            <div class="habit-block">
-                <h3>基础习性</h3>
-                <p id="detailHabit"></p>
-            </div>
-
-            <!-- 下方：完整攻略信息 -->
-            <div class="info-wrap">
-                <div class="info-block">
-                    <strong>推荐性格：</strong><span id="detailNature"></span>
-                </div>
-                <div class="info-block">
-                    <strong>专属特性：</strong><span id="detailAbility"></span>
-                </div>
-                <div class="info-block">
-                    <strong>搭配招式：</strong><span id="detailMoves"></span>
-                </div>
-                <div class="info-block">
-                    <strong>推荐道具：</strong><span id="detailItem"></span>
-                </div>
-                <div class="info-block">
-                    <strong>实战玩法：</strong><span id="detailPlay"></span>
-                </div>
-            </div>
-
-            <!-- 评论区 -->
-            <div class="comment-section">
-                <h3>玩家评论</h3>
-                <textarea class="comment-input" id="commentInput" placeholder="写下你的攻略心得、使用体验..."></textarea>
-                <button class="submit-btn" onclick="addComment()">发表评论</button>
-                <div class="comment-list" id="commentList"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 隐藏背景音乐 -->
-    <audio id="bgm" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" loop>
+<!-- 背景音乐 -->
+<audio id="bgm" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" loop></audio>
 
 <script>
-    // 全部数据：新增 习性 habit 字段
-    const pokemonData = [
+const pokemonData = [
         {
             name:"烈空坐",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/384.png",
             habit:"翱翔于臭氧层之中，性情高傲且极具领地意识。拥有改写天气的能力，一旦现身便会引发天地异象，传说中的天空霸主，极少主动接近人类。",
@@ -530,52 +459,45 @@
             habit:"如同剑士一般优雅战斗，正义感极强。面对邪恶属性的对手会斗志大增，近战招式凌厉果断。",
             nature:"固执",ability:"正义之心",moves:"近身战+精神利刃+剑舞",item:"超级石",play:"恶系克星，近战爆发强悍"
         }
-    ];
+];
 
-    let currentIndex = 0;
+let currentIndex = 0;
 
-    // 跳转详情页
-    function goToDetail(index) {
-        currentIndex = index;
-        const data = pokemonData[index];
-        document.getElementById('detailImg').src = data.img;
-        document.getElementById('detailName').innerText = data.name;
-        document.getElementById('detailHabit').innerText = data.habit;
-        document.getElementById('detailNature').innerText = data.nature;
-        document.getElementById('detailAbility').innerText = data.ability;
-        document.getElementById('detailMoves').innerText = data.moves;
-        document.getElementById('detailItem').innerText = data.item;
-        document.getElementById('detailPlay').innerText = data.play;
+function goToDetail(index) {
+    currentIndex = index;
+    const d = pokemonData[index];
+    document.getElementById('detailImg').src = d.img;
+    document.getElementById('detailName').innerText = d.name;
+    document.getElementById('detailHabit').innerText = d.habit;
+    document.getElementById('detailNature').innerText = d.nature;
+    document.getElementById('detailAbility').innerText = d.ability;
+    document.getElementById('detailMoves').innerText = d.moves;
+    document.getElementById('detailItem').innerText = d.item;
+    document.getElementById('detailPlay').innerText = d.play;
 
-        document.getElementById('homePage').classList.remove('active');
-        document.getElementById('detailPage').classList.add('active');
-    }
+    document.getElementById('homePage').classList.remove('active');
+    document.getElementById('detailPage').classList.add('active');
+}
 
-    // 返回列表
-    function goBack() {
-        document.getElementById('detailPage').classList.remove('active');
-        document.getElementById('homePage').classList.add('active');
-    }
+function goBack() {
+    document.getElementById('detailPage').classList.remove('active');
+    document.getElementById('homePage').classList.add('active');
+}
 
-    // 发表评论
-    function addComment() {
-        const input = document.getElementById('commentInput');
-        const text = input.value.trim();
-        if (!text) return;
-        const commentList = document.getElementById('commentList');
-        const newComment = document.createElement('div');
-        newComment.className = 'comment-item';
-        newComment.innerText = text;
-        commentList.appendChild(newComment);
-        input.value = '';
-    }
+function addComment() {
+    const t = document.getElementById('commentInput').value.trim();
+    if (!t) return;
+    const c = document.createElement('div');
+    c.className = 'comment-item';
+    c.innerText = t;
+    document.getElementById('commentList').appendChild(c);
+    document.getElementById('commentInput').value = '';
+}
 
-    // 页面点击播放背景音乐
-    document.addEventListener('click', function playBGM() {
-        const audio = document.getElementById('bgm');
-        audio.play().catch(e => {});
-        document.removeEventListener('click', playBGM);
-    });
+document.addEventListener('click', function play() {
+    document.getElementById('bgm').play().catch(()=>{});
+    document.removeEventListener('click', play);
+});
 </script>
 </body>
 </html>
