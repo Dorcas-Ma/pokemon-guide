@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>究极绿宝石小智版 · 宝可梦全攻略</title>
-    <!-- 翩翩体字体 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
@@ -23,7 +22,6 @@
             background-attachment: fixed;
         }
 
-        /* 顶部栏：标题 + 搜索框 */
         .top-bar {
             position: relative;
             max-width: 1500px;
@@ -37,7 +35,6 @@
             text-shadow: 0 0 18px #00ff9d99;
             letter-spacing: 2px;
         }
-        /* 右上角搜索框 */
         .search-box {
             position: absolute;
             right: 0;
@@ -63,7 +60,6 @@
             box-shadow: 0 0 12px #00ff9d55;
         }
 
-        /* 页面切换入场动画 */
         .page {
             display: none;
             animation: fadeInBig 0.6s ease-out;
@@ -72,17 +68,10 @@
             display: block;
         }
         @keyframes fadeInBig {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px) scale(0.96); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0) scale(1); 
-            }
+            from { opacity: 0; transform: translateY(20px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* 卡片网格布局 */
         .grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -91,7 +80,6 @@
             margin: 0 auto;
         }
 
-        /* 卡片样式 + 强化悬浮特效 */
         .card {
             background: #111;
             border: 1px solid #222;
@@ -132,7 +120,6 @@
             font-size: 15px;
         }
 
-        /* 详情页容器 */
         .detail-page {
             max-width: 1000px;
             margin: 0 auto;
@@ -143,7 +130,6 @@
             box-shadow: 0 0 40px #000000aa;
         }
 
-        /* 返回按钮 */
         .back-btn {
             padding: 12px 26px;
             background: #00ff9d;
@@ -162,7 +148,6 @@
             box-shadow: 0 0 12px #00ff9d77;
         }
 
-        /* 详情头部 */
         .detail-header {
             text-align: center;
             margin-bottom: 40px;
@@ -187,7 +172,6 @@
             text-shadow: 0 0 15px #00ff9d77;
         }
 
-        /* 习性模块 */
         .habit-box {
             background: #151515;
             border-radius: 16px;
@@ -210,7 +194,6 @@
             color: #ddd;
         }
 
-        /* 攻略信息模块 */
         .info-box {
             background: #151515;
             border-radius: 16px;
@@ -234,7 +217,6 @@
             font-weight: 600;
         }
 
-        /* 评论区 */
         .comment-section {
             border-top: 1px solid #222;
             padding-top: 35px;
@@ -298,7 +280,6 @@
 </head>
 
 <body>
-<!-- 顶部区域：标题 + 右上角搜索框 -->
 <div class="top-bar">
     <h1 class="home-title">究极绿宝石小智版 · 宝可梦全攻略</h1>
     <div class="search-box">
@@ -306,14 +287,10 @@
     </div>
 </div>
 
-<!-- 首页列表页 -->
 <div id="homePage" class="page active">
-    <div class="grid" id="cardGrid">
-        <!-- 卡片由JS动态生成 -->
-    </div>
+    <div class="grid" id="cardGrid"></div>
 </div>
 
-<!-- 详情页 -->
 <div id="detailPage" class="page">
     <div class="detail-page">
         <button class="back-btn" onclick="goBack()">← 返回列表</button>
@@ -345,13 +322,11 @@
     </div>
 </div>
 
-<!-- 舒缓平淡背景音乐 -->
 <audio id="bgm" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" loop>
 
 <script>
-// ===================== 100只宝可梦数据（权威战力排名） =====================
+// 前100只宝可梦权威排名数据
 const pokemonData = [
-    // TOP1-TOP10 一级神/顶级战力
     {name:"烈空坐",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/384.png",habit:"翱翔于臭氧层之中，性情高傲且极具领地意识。拥有改写天气的能力，一旦现身便会引发天地异象，传说中的天空霸主，极少主动接近人类。",nature:"爽朗",ability:"天气锁",moves:"画龙点睛+神速+地震+龙舞",item:"烈空坐超级石",play:"龙舞强化推队，版本最强输出核心"},
     {name:"超梦",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",habit:"由人类制造的人造宝可梦，智商极高，内心孤独多疑。拥有顶尖的精神力量，性格孤傲，不信任人类，追求自身存在的意义。",nature:"胆小",ability:"压迫感",moves:"精神冲击+影子球+冥想",item:"超梦进化石",play:"高速特攻炮台，冥想强化后碾压对手"},
     {name:"盖欧卡",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/382.png",habit:"海洋的远古霸主，沉睡于深海海沟。苏醒后会召唤连绵大雨，扩张海洋版图，与固拉多是宿敌，争斗会引发巨大的自然灾害。",nature:"内敛",ability:"降雨",moves:"水炮+打雷+冰冻光束",item:"潮湿岩石",play:"雨天队绝对核心，雨天下输出大幅提升"},
@@ -362,7 +337,6 @@ const pokemonData = [
     {name:"骑拉帝纳",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/487.png",habit:"居于反转世界的神兽，性格孤僻凶悍，掌管生与死的边界。外形诡异，战力凶悍，极少现世。",nature:"固执",ability:"漂浮",moves:"暗影爪+龙之俯冲+地震+剑舞",item:"突击背心",play:"高速物攻收割，打击面广泛"},
     {name:"酋雷姆",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/646.png",habit:"冰与龙结合的传说宝可梦，体内蕴藏无尽寒气。性情冰冷好战，能融合黑白二神形态，战力暴涨。",nature:"爽朗",ability:"冰冻皮肤",moves:"冰冻世界+龙爪+地震+剑舞",item:"讲究围巾",play:"高速爆发，克制龙系主流宝可梦"},
     {name:"凤王",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/250.png",habit:"栖息于铃铃塔顶端的神鸟，身披七彩火焰。传说能带来祥瑞，拥有复活生命的能力，性情高贵优雅。",nature:"大胆",ability:"再生力",moves:"圣火+神鸟猛击+冥想+羽栖",item:"剩饭",play:"续航强化型特攻手，站场能力优秀"},
-    // TOP11-TOP30 二级神/准神
     {name:"洛奇亚",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/249.png",habit:"海洋上空的守护神，拥有安定风暴的力量。性格沉稳温和，不喜争斗，危机时会全力守护海域。",nature:"大胆",ability:"压力",moves:"空气爆炸+精神冲击+羽栖+冥想",item:"剩饭",play:"全能耐久盾，干扰+续航兼备"},
     {name:"烈咬陆鲨",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/445.png",habit:"栖息于沙漠与岩壁地带，行动迅捷，擅长在沙暴中隐蔽身形。四肢强健，咬合力度惊人，是野外十分强悍的掠食者。",nature:"爽朗",ability:"沙隐",moves:"地震+龙爪+剑舞+咬碎",item:"超级石",play:"沙暴队强力物攻手，速度与攻击兼备"},
     {name:"班吉拉",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/248.png",habit:"身躯坚硬如岩石，现身便会卷起沙暴。性格沉稳凶悍，领地观念极强，群体行动时威慑力十足，是沙暴体系的核心存在。",nature:"固执",ability:"扬沙",moves:"石刃+地震+龙爪+剑舞",item:"超级石",play:"沙暴队发起者，攻防一体的主力"},
@@ -383,7 +357,6 @@ const pokemonData = [
     {name:"捷克罗姆",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/644.png",habit:"象征理想的黑龙，体内涌动雷电。性格坚毅，龙+电系组合，物理战力强悍。",nature:"固执",ability:"兆级电压",moves:"雷击+龙爪+剑舞+蛮力",item:"讲究头带",play:"龙电物攻核心，打击面强势"},
     {name:"玛机雅娜",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/762.png",habit:"千年人造人偶宝可梦，外表精致。体内蕴藏神秘能量，攻防辅能力均衡，擅长团队辅助。",nature:"大胆",ability:"魂心",moves:"吸取之吻+金属音+铁壁+魔法闪耀",item:"剩饭",play:"团队辅助核心，强化队友能力"},
     {name:"银伴战兽",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/800.png",habit:"依靠对应存储碟改变属性，本体能力均衡。性格温顺，适配多种战术体系。",nature:"均衡",ability:"AR系统",moves:"多属性攻击+神速+冥想+铁壁",item:"生命玉",play:"百变战术手，灵活适配阵容"},
-    // TOP31-TOP60 高阶热门主力
     {name:"沙奈朵",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/282.png",habit:"心思细腻，能感知训练家的情绪，会拼尽全力保护同伴。精通精神类能力，姿态优雅，性情温顺，极少主动发起攻击。",nature:"内敛",ability:"同步",moves:"月亮之力+精神强念+冥想+影子球",item:"超级石",play:"龙系克星，特攻稳定，可强化可消耗"},
     {name:"七夕青鸟",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/334.png",habit:"成群栖息在高空云层之间，叫声婉转优美。身体轻盈擅长飞行，性格温和，偏向辅助生存，拥有优秀的续航能力。",nature:"大胆",ability:"自然恢复",moves:"龙星群+月亮之力+羽栖+暴风",item:"超级石",play:"高耐久肉盾辅助，持续站场干扰"},
     {name:"喷火龙Y",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",habit:"翅膀能产生灼热气流，喜爱阳光充足的环境。火焰温度极高，斗志昂扬，进化后偏向远程特攻作战，行动灵活。",nature:"胆小",ability:"太阳之力",moves:"热风+空气斩+阳光烈焰+大字爆炎",item:"喷火龙Y石",play:"晴天队高速特攻手，爆发力出众"},
@@ -414,7 +387,6 @@ const pokemonData = [
     {name:"姆克鹰",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/398.png",habit:"成群结队在空中翱翔，性情勇猛好斗。飞行速度极快，近战冲撞威力惊人。",nature:"爽朗",ability:"威吓",moves:"勇鸟猛攻+近身战+剑舞+高速移动",item:"生命玉",play:"高速飞行物攻，爆发极高"},
     {name:"电击兽",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/125.png",habit:"全身电光缭绕，性格活泼好动。近距离电击威力强悍，经典电系主力。",nature:"固执",ability:"静电",moves:"雷电拳+十万伏特+剑舞+近身战",item:"生命玉",play:"电系近战输出，玩法灵活"},
     {name:"鸭嘴炎兽",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/467.png",habit:"体内流淌岩浆，体温极高。火系特攻强者，周身热浪可以灼伤靠近的对手。",nature:"内敛",ability:"火焰身躯",moves:"大字爆炎+喷射火焰+冥想+能量球",item:"讲究眼镜",play:"火系远程炮台，打击面广"},
-    // TOP61-TOP100 主流实用宝可梦
     {name:"大钢蛇",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/208.png",habit:"身躯如钢铁长蛇，在地底穿行。外壳坚硬无比，物理防御顶尖，行动稳重缓慢。",nature:"大胆",ability:"坚硬",moves:"铁尾+地震+岩崩+铁壁",item:"剩饭",play:"老牌物理盾牌，抗性优秀"},
     {name:"大甲",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/127.png",habit:"巨大虫钳威力十足，栖息于森林之中。性格好斗，近战爆发力极强。",nature:"爽朗",ability:"怪力钳",moves:"十字剪+近身战+剑舞+高速移动",item:"超级石",play:"高速虫系物攻，收割能力强"},
     {name:"赫拉克罗斯",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/214.png",habit:"头上长有巨大犄角，力气惊人。喜欢吸食树汁，格斗+虫系经典强攻选手。",nature:"爽朗",ability:"虫之预感",moves:"近身战+十字剪+剑舞+岩崩",item:"讲究头带",play:"经典强攻手，打击面优质"},
@@ -441,15 +413,49 @@ let currentIndex = 0;
 const cardGrid = document.getElementById('cardGrid');
 const searchInput = document.getElementById('searchInput');
 
-// 初始化渲染所有卡片
+// ---------- 评论持久化：localStorage ----------
+let commentsData = JSON.parse(localStorage.getItem('pokemonComments')) || {};
+// 保存评论到本地
+function saveComments() {
+    localStorage.setItem('pokemonComments', JSON.stringify(commentsData));
+}
+// 渲染当前宝可梦的评论
+function renderComments() {
+    const list = document.getElementById('commentList');
+    list.innerHTML = '';
+    const name = pokemonData[currentIndex].name;
+    const arr = commentsData[name] || [];
+    arr.forEach(text => {
+        const item = document.createElement('div');
+        item.className = 'comment-item';
+        item.innerText = text;
+        list.appendChild(item);
+    });
+}
+// 发表评论
+function addComment() {
+    const t = document.getElementById('commentInput').value.trim();
+    if (!t) return;
+    const name = pokemonData[currentIndex].name;
+    if (!commentsData[name]) commentsData[name] = [];
+    commentsData[name].push(t);
+    saveComments();
+    renderComments();
+    document.getElementById('commentInput').value = '';
+}
+
+// ---------- 卡片渲染：显示真实排名、绑定原数组索引 ----------
 function renderCards(list) {
     cardGrid.innerHTML = '';
-    list.forEach((item, idx) => {
+    list.forEach(item => {
+        // 找到该宝可梦在原数组里的真实索引（决定排名）
+        const realIndex = pokemonData.findIndex(p => p.name === item.name);
         const card = document.createElement('div');
         card.className = 'card';
-        card.onclick = () => goToDetail(idx);
+        // 点击时传递真实索引，内容永远对应
+        card.onclick = () => goToDetail(realIndex);
         card.innerHTML = `
-            <div class="rank">TOP${idx + 1}</div>
+            <div class="rank">TOP${realIndex + 1}</div>
             <img src="${item.img}" alt="${item.name}">
             <div>${item.name}</div>
         `;
@@ -457,22 +463,21 @@ function renderCards(list) {
     });
 }
 
-// 页面初始化
+// 初始化渲染全部卡片
 renderCards(pokemonData);
 
-// 搜索功能：实时检索
+// ---------- 搜索：只过滤显示，不打乱原索引 ----------
 searchInput.addEventListener('input', function(){
     const key = this.value.trim().toLowerCase();
     if(!key){
         renderCards(pokemonData);
         return;
     }
-    // 模糊匹配名称
     const filterList = pokemonData.filter(item => item.name.includes(key));
     renderCards(filterList);
 });
 
-// 跳转详情页
+// ---------- 详情页：用真实索引取数据 ----------
 function goToDetail(index) {
     currentIndex = index;
     const d = pokemonData[index];
@@ -485,28 +490,19 @@ function goToDetail(index) {
     document.getElementById('detailItem').innerText = d.item;
     document.getElementById('detailPlay').innerText = d.play;
 
+    renderComments(); // 加载该宝可梦的评论
+
     document.getElementById('homePage').classList.remove('active');
     document.getElementById('detailPage').classList.add('active');
 }
 
-// 返回列表页
+// 返回列表
 function goBack() {
     document.getElementById('detailPage').classList.remove('active');
     document.getElementById('homePage').classList.add('active');
 }
 
-// 发表评论
-function addComment() {
-    const t = document.getElementById('commentInput').value.trim();
-    if (!t) return;
-    const c = document.createElement('div');
-    c.className = 'comment-item';
-    c.innerText = t;
-    document.getElementById('commentList').appendChild(c);
-    document.getElementById('commentInput').value = '';
-}
-
-// 播放舒缓背景音乐
+// 背景音乐
 document.addEventListener('click', function play() {
     document.getElementById('bgm').play().catch(()=>{});
     document.removeEventListener('click', play);
