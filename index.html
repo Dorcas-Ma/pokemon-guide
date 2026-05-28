@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>究极绿宝石小智版 - 宝可梦攻略站</title>
+    <title>究极绿宝石小智版 · 宝可梦全攻略</title>
+    <!-- 引入翩翩体字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Segoe UI", "微软雅黑", sans-serif;
+            /* 全局设置翩翩体 */
+            font-family: "ZCOOL KuaiLe", "微软雅黑", sans-serif;
         }
 
         body {
@@ -19,18 +24,24 @@
             background-attachment: fixed;
         }
 
-        /* 页面切换 */
+        /* 页面切换：加强淡入入场特效 */
         .page {
             display: none;
-            animation: fadeIn 0.4s ease;
+            animation: fadeInBig 0.6s ease-out;
         }
         .page.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInBig {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px) scale(0.96); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+            }
         }
 
         /* 首页标题 */
@@ -39,7 +50,7 @@
             font-size: 36px;
             color: #00ff9d;
             margin: 40px 0 50px;
-            text-shadow: 0 0 15px #00ff9d88;
+            text-shadow: 0 0 18px #00ff9d99;
             letter-spacing: 2px;
         }
 
@@ -52,7 +63,7 @@
             margin: 0 auto;
         }
 
-        /* 卡片美化 */
+        /* 卡片样式 + 强化悬浮、上浮、发光特效 */
         .card {
             background: #111;
             border: 1px solid #222;
@@ -60,13 +71,15 @@
             padding: 20px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.4s ease;
             box-shadow: 0 0 12px #00000088;
         }
         .card:hover {
-            transform: translateY(-6px);
+            /* 加大上浮距离 */
+            transform: translateY(-10px) scale(1.04);
             border-color: #00ff9d;
-            box-shadow: 0 0 25px #00ff9d44;
+            /* 强化发光阴影 */
+            box-shadow: 0 0 35px #00ff9d66, 0 0 15px #00ff9d44 inset;
             background: #151515;
         }
         .card img {
@@ -77,6 +90,10 @@
             border-radius: 12px;
             padding: 8px;
             margin-bottom: 12px;
+            transition: transform 0.3s;
+        }
+        .card:hover img {
+            transform: rotate(3deg) scale(1.05);
         }
         .card .rank {
             color: #00ff9d;
@@ -111,10 +128,12 @@
             cursor: pointer;
             font-size: 16px;
             margin-bottom: 30px;
-            transition: 0.2s;
+            transition: all 0.3s;
         }
         .back-btn:hover {
             background: #00e68c;
+            transform: scale(1.05);
+            box-shadow: 0 0 12px #00ff9d77;
         }
 
         /* 详情头部 */
@@ -131,20 +150,28 @@
             object-fit: contain;
             margin-bottom: 20px;
             border: 1px solid #333;
+            transition: all 0.3s;
+        }
+        .detail-header img:hover {
+            box-shadow: 0 0 25px #00ff9d55;
         }
         .detail-header h2 {
             font-size: 36px;
             color: #00ff9d;
-            text-shadow: 0 0 12px #00ff9d66;
+            text-shadow: 0 0 15px #00ff9d77;
         }
 
-        /* 习性模块（上） */
+        /* 习性模块 */
         .habit-box {
             background: #151515;
             border-radius: 16px;
             padding: 30px;
             margin-bottom: 35px;
             border: 1px solid #222;
+            transition: box-shadow 0.3s;
+        }
+        .habit-box:hover {
+            box-shadow: 0 0 20px #00ff9d33;
         }
         .habit-box h3 {
             color: #00ff9d;
@@ -157,13 +184,17 @@
             color: #ddd;
         }
 
-        /* 攻略模块（下） */
+        /* 攻略模块 */
         .info-box {
             background: #151515;
             border-radius: 16px;
             padding: 30px;
             margin-bottom: 35px;
             border: 1px solid #222;
+            transition: box-shadow 0.3s;
+        }
+        .info-box:hover {
+            box-shadow: 0 0 20px #00ff9d33;
         }
         .info-item {
             margin: 18px 0;
@@ -198,6 +229,12 @@
             font-size: 16px;
             resize: none;
             margin-bottom: 14px;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+        .comment-input:focus {
+            outline: none;
+            border-color: #00ff9d;
+            box-shadow: 0 0 15px #00ff9d44;
         }
         .submit-btn {
             padding: 12px 26px;
@@ -208,10 +245,12 @@
             border-radius: 12px;
             cursor: pointer;
             font-size: 16px;
-            transition: 0.2s;
+            transition: all 0.3s;
         }
         .submit-btn:hover {
             background: #00e68c;
+            transform: scale(1.05);
+            box-shadow: 0 0 12px #00ff9d77;
         }
         .comment-list {
             margin-top: 25px;
@@ -224,6 +263,10 @@
             border-left: 4px solid #00ff9d;
             line-height: 1.7;
             color: #eee;
+            transition: transform 0.2s;
+        }
+        .comment-item:hover {
+            transform: translateX(4px);
         }
     </style>
 </head>
@@ -305,7 +348,7 @@
 </div>
 
 <!-- 背景音乐 -->
-<audio id="bgm" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" loop></audio>
+<audio id="bgm" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" loop>
 
 <script>
 const pokemonData = [
