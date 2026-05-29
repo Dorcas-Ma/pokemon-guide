@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>究极绿宝石小智版 · 宝可梦全攻略</title>
+    <title>究极绿宝石小智版 · 宝可梦全攻略（前100权威排名）</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
@@ -14,14 +14,12 @@
             box-sizing: border-box;
             font-family: "ZCOOL KuaiLe", "微软雅黑", sans-serif;
         }
-
         body {
             background: #000;
             color: #fff;
             padding: 20px;
             background-attachment: fixed;
         }
-
         .top-bar {
             position: relative;
             max-width: 1500px;
@@ -59,7 +57,6 @@
             border-color: #00ff9d;
             box-shadow: 0 0 12px #00ff9d55;
         }
-
         .page {
             display: none;
             animation: fadeInBig 0.6s ease-out;
@@ -71,7 +68,6 @@
             from { opacity: 0; transform: translateY(20px) scale(0.96); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
-
         .grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -79,7 +75,6 @@
             max-width: 1500px;
             margin: 0 auto;
         }
-
         .card {
             background: #111;
             border: 1px solid #222;
@@ -119,7 +114,6 @@
             color: #eee;
             font-size: 15px;
         }
-
         .detail-page {
             max-width: 1000px;
             margin: 0 auto;
@@ -129,7 +123,6 @@
             border: 1px solid #222;
             box-shadow: 0 0 40px #000000aa;
         }
-
         .back-btn {
             padding: 12px 26px;
             background: #00ff9d;
@@ -147,7 +140,6 @@
             transform: scale(1.05);
             box-shadow: 0 0 12px #00ff9d77;
         }
-
         .detail-header {
             text-align: center;
             margin-bottom: 40px;
@@ -171,7 +163,6 @@
             color: #00ff9d;
             text-shadow: 0 0 15px #00ff9d77;
         }
-
         .habit-box {
             background: #151515;
             border-radius: 16px;
@@ -193,7 +184,6 @@
             line-height: 1.9;
             color: #ddd;
         }
-
         .info-box {
             background: #151515;
             border-radius: 16px;
@@ -216,7 +206,6 @@
             display: inline-block;
             font-weight: 600;
         }
-
         .comment-section {
             border-top: 1px solid #222;
             padding-top: 35px;
@@ -281,7 +270,7 @@
 
 <body>
 <div class="top-bar">
-    <h1 class="home-title">究极绿宝石小智版 · 宝可梦全攻略</h1>
+    <h1 class="home-title">究极绿宝石小智版 · 宝可梦全攻略（前100权威排名）</h1>
     <div class="search-box">
         <input type="text" class="search-input" id="searchInput" placeholder="输入宝可梦名称搜索...">
     </div>
@@ -325,101 +314,105 @@
 <audio id="bgm" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" loop>
 
 <script>
-// 前100只宝可梦权威排名数据
+// 【权威前100】基于官方设定+种族值+Smogon对战Tier+究极绿宝石环境
 const pokemonData = [
-    {name:"烈空坐",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/384.png",habit:"翱翔于臭氧层之中，性情高傲且极具领地意识。拥有改写天气的能力，一旦现身便会引发天地异象，传说中的天空霸主，极少主动接近人类。",nature:"爽朗",ability:"天气锁",moves:"画龙点睛+神速+地震+龙舞",item:"烈空坐超级石",play:"龙舞强化推队，版本最强输出核心"},
-    {name:"超梦",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",habit:"由人类制造的人造宝可梦，智商极高，内心孤独多疑。拥有顶尖的精神力量，性格孤傲，不信任人类，追求自身存在的意义。",nature:"胆小",ability:"压迫感",moves:"精神冲击+影子球+冥想",item:"超梦进化石",play:"高速特攻炮台，冥想强化后碾压对手"},
-    {name:"盖欧卡",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/382.png",habit:"海洋的远古霸主，沉睡于深海海沟。苏醒后会召唤连绵大雨，扩张海洋版图，与固拉多是宿敌，争斗会引发巨大的自然灾害。",nature:"内敛",ability:"降雨",moves:"水炮+打雷+冰冻光束",item:"潮湿岩石",play:"雨天队绝对核心，雨天下输出大幅提升"},
-    {name:"固拉多",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/383.png",habit:"陆地的创世神兽，栖息于火山深处。苏醒后烈日当空，蒸发水分、扩张陆地，一生都在与盖欧卡争斗，性格暴躁好战。",nature:"固执",ability:"日照",moves:"断崖之剑+闪焰冲锋+剑舞",item:"炽热岩石",play:"晴天队核心，物理爆发极强"},
+    // 1-10：一级神/创世神（设定天花板）
     {name:"阿尔宙斯",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/493.png",habit:"传说中创造整个宝可梦世界的创世神，居于高空中的神殿。性情平和，拥有全属性之力，是所有宝可梦的起源。",nature:"均衡",ability:"多重属性",moves:"制裁光砾+神速+大地之力+冥想",item:"王者之盾",play:"全能型神兽，攻防辅一体，适配所有阵容"},
-    {name:"帕路奇亚",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/484.png",habit:"掌控空间的传说宝可梦，栖息于空间裂缝之中。性格冷静威严，能够扭曲空间，守护世界的空间秩序。",nature:"内敛",ability:"空间扭曲",moves:"亚空切断+龙之波动+水炮+冥想",item:"生命玉",play:"空间队核心，特攻压制力极强"},
-    {name:"帝牙卢卡",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/483.png",habit:"掌控时间的传说宝可梦，身躯如钢铁巨龙。能够停止、加速时间，性格沉稳，守护时间法则。",nature:"大胆",ability:"时间扭曲",moves:"时光咆哮+金属爪+龙尾+铁壁",item:"剩饭",play:"耐久站场，干扰对手节奏"},
-    {name:"骑拉帝纳",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/487.png",habit:"居于反转世界的神兽，性格孤僻凶悍，掌管生与死的边界。外形诡异，战力凶悍，极少现世。",nature:"固执",ability:"漂浮",moves:"暗影爪+龙之俯冲+地震+剑舞",item:"突击背心",play:"高速物攻收割，打击面广泛"},
-    {name:"酋雷姆",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/646.png",habit:"冰与龙结合的传说宝可梦，体内蕴藏无尽寒气。性情冰冷好战，能融合黑白二神形态，战力暴涨。",nature:"爽朗",ability:"冰冻皮肤",moves:"冰冻世界+龙爪+地震+剑舞",item:"讲究围巾",play:"高速爆发，克制龙系主流宝可梦"},
-    {name:"凤王",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/250.png",habit:"栖息于铃铃塔顶端的神鸟，身披七彩火焰。传说能带来祥瑞，拥有复活生命的能力，性情高贵优雅。",nature:"大胆",ability:"再生力",moves:"圣火+神鸟猛击+冥想+羽栖",item:"剩饭",play:"续航强化型特攻手，站场能力优秀"},
-    {name:"洛奇亚",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/249.png",habit:"海洋上空的守护神，拥有安定风暴的力量。性格沉稳温和，不喜争斗，危机时会全力守护海域。",nature:"大胆",ability:"压力",moves:"空气爆炸+精神冲击+羽栖+冥想",item:"剩饭",play:"全能耐久盾，干扰+续航兼备"},
-    {name:"烈咬陆鲨",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/445.png",habit:"栖息于沙漠与岩壁地带，行动迅捷，擅长在沙暴中隐蔽身形。四肢强健，咬合力度惊人，是野外十分强悍的掠食者。",nature:"爽朗",ability:"沙隐",moves:"地震+龙爪+剑舞+咬碎",item:"超级石",play:"沙暴队强力物攻手，速度与攻击兼备"},
-    {name:"班吉拉",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/248.png",habit:"身躯坚硬如岩石，现身便会卷起沙暴。性格沉稳凶悍，领地观念极强，群体行动时威慑力十足，是沙暴体系的核心存在。",nature:"固执",ability:"扬沙",moves:"石刃+地震+龙爪+剑舞",item:"超级石",play:"沙暴队发起者，攻防一体的主力"},
-    {name:"快龙",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png",habit:"看似笨拙实则飞行极快，性情憨厚善良。综合能力全面，能打能抗能回血，属于全能型龙族宝可梦。",nature:"爽朗",ability:"多重鳞片",moves:"龙爪+地震+羽栖+雷电拳",item:"剩饭",play:"全能主力，泛用性拉满"},
-    {name:"暴飞龙",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/373.png",habit:"飞行能力卓越，成年后极具威慑力。初期性情暴躁，成熟后更加稳重，依靠强健的躯体展开近战强攻。",nature:"爽朗",ability:"威吓",moves:"龙爪+地震+龙舞+大字爆炎",item:"超级石",play:"龙舞强化推队，泛用性极强"},
-    {name:"巨金怪",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/376.png",habit:"由多个金属个体组合而成，心智合一，身躯坚不可摧。行动稳重，防御力顶尖，依靠蛮力与金属招式压制对手。",nature:"固执",ability:"净体",moves:"彗星拳+子弹拳+地震+臂锤",item:"超级石",play:"钢系物攻主力，免疫负面状态"},
-    {name:"三头龙",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/635.png",habit:"拥有三颗头颅，性格凶暴狡猾，栖息于阴暗洞穴。三颗头各自思考，战斗时配合默契，诡计多端。",nature:"胆小",ability:"浮游",moves:"恶之波动+龙之波动+大字爆炎+大地之力",item:"生命玉",play:"高速特攻手，打击面全面"},
-    {name:"土地云",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/645.png",habit:"掌管大地丰饶的传说宝可梦，外形如猛兽。性格勇猛，能够引发风暴，是地面系顶尖战力。",nature:"固执",ability:"威吓",moves:"地震+蛮力+岩崩+剑舞",item:"讲究头带",play:"地面系物理核心，爆发极高"},
-    {name:"雷电云",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/642.png",habit:"驾驭雷电在空中飞驰，性情活泼好动。所到之处电闪雷鸣，擅长高速游击作战。",nature:"胆小",ability:"恶作剧之心",moves:"十万伏特+空气斩+能量球+诡计",item:"讲究眼镜",play:"高速干扰+特攻输出"},
-    {name:"龙卷云",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/641.png",habit:"操控狂风的传说宝可梦，身姿轻盈。喜欢四处游荡，狂风可以轻易掀翻重物，空战能力极强。",nature:"胆小",ability:"恶作剧之心",moves:"空气爆炸+暴风+诡计+高速移动",item:"讲究围巾",play:"高速骚扰型选手"},
-    {name:"哲尔尼亚斯",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/716.png",habit:"掌管生命与森林的神兽，周身散发治愈光芒。性格温婉，能赋予万物生机，妖精系顶级战力。",nature:"内敛",ability:"妖精气场",moves:"月爆+大地之力+冥想+吸取之吻",item:"剩饭",play:"妖精系核心，强化+续航一体"},
-    {name:"伊裴尔塔尔",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/717.png",habit:"掌管毁灭与死亡的神兽，外形如暗黑巨鸟。性情凶戾，所过之处生机凋零，恶+飞行系霸主。",nature:"爽朗",ability:"暗黑气场",moves:"恶之波动+暴风+剑舞+欺诈",item:"生命玉",play:"高速物攻收割，压制续航型宝可梦"},
-    {name:"盖诺赛克特",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/649.png",habit:"远古改造宝可梦，背部装载能量炮。思维冰冷机械，依靠科技武器作战，射速极快。",nature:"胆小",ability:"下载",moves:"高科技光炮+虫鸣+冰冻光束+十万伏特",item:"讲究眼镜",play:"高速特攻炮台，属性打击全面"},
-    {name:"毕力吉翁",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/640.png",habit:"三圣剑之一，身姿优雅如剑士。秉持正义，守护森林，格斗系招式凌厉。",nature:"爽朗",ability:"正义之心",moves:"近战拍打+叶刃+剑舞+高速移动",item:"讲究围巾",play:"高速格斗输出"},
-    {name:"代拉基翁",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/639.png",habit:"三圣剑之一，身躯坚硬如山岩。性格沉稳坚毅，防御力出众，擅长正面强攻。",nature:"固执",ability:"正义之心",moves:"岩崩+近战拍打+剑舞+地震",item:"突击背心",play:"攻防兼备的物理战士"},
-    {name:"勾帕路翁",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/638.png",habit:"三圣剑领袖，头脑聪慧，行事冷静。擅长战术布局，攻防均衡，是团队核心。",nature:"大胆",ability:"正义之心",moves:"近战拍打+金属爪+铁壁+吸取拳",item:"剩饭",play:"耐久干扰+续航型格斗手"},
-    {name:"雷希拉姆",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/643.png",habit:"象征真理的白龙，周身燃烧白色火焰。性格正直，火焰之力极强，龙+火系传说宝可梦。",nature:"内敛",ability:"涡轮火焰",moves:"青色火焰+龙之波动+冥想+大字爆炎",item:"讲究眼镜",play:"火系特攻天花板之一"},
-    {name:"捷克罗姆",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/644.png",habit:"象征理想的黑龙，体内涌动雷电。性格坚毅，龙+电系组合，物理战力强悍。",nature:"固执",ability:"兆级电压",moves:"雷击+龙爪+剑舞+蛮力",item:"讲究头带",play:"龙电物攻核心，打击面强势"},
-    {name:"玛机雅娜",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/762.png",habit:"千年人造人偶宝可梦，外表精致。体内蕴藏神秘能量，攻防辅能力均衡，擅长团队辅助。",nature:"大胆",ability:"魂心",moves:"吸取之吻+金属音+铁壁+魔法闪耀",item:"剩饭",play:"团队辅助核心，强化队友能力"},
-    {name:"银伴战兽",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/800.png",habit:"依靠对应存储碟改变属性，本体能力均衡。性格温顺，适配多种战术体系。",nature:"均衡",ability:"AR系统",moves:"多属性攻击+神速+冥想+铁壁",item:"生命玉",play:"百变战术手，灵活适配阵容"},
-    {name:"沙奈朵",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/282.png",habit:"心思细腻，能感知训练家的情绪，会拼尽全力保护同伴。精通精神类能力，姿态优雅，性情温顺，极少主动发起攻击。",nature:"内敛",ability:"同步",moves:"月亮之力+精神强念+冥想+影子球",item:"超级石",play:"龙系克星，特攻稳定，可强化可消耗"},
-    {name:"七夕青鸟",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/334.png",habit:"成群栖息在高空云层之间，叫声婉转优美。身体轻盈擅长飞行，性格温和，偏向辅助生存，拥有优秀的续航能力。",nature:"大胆",ability:"自然恢复",moves:"龙星群+月亮之力+羽栖+暴风",item:"超级石",play:"高耐久肉盾辅助，持续站场干扰"},
-    {name:"喷火龙Y",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",habit:"翅膀能产生灼热气流，喜爱阳光充足的环境。火焰温度极高，斗志昂扬，进化后偏向远程特攻作战，行动灵活。",nature:"胆小",ability:"太阳之力",moves:"热风+空气斩+阳光烈焰+大字爆炎",item:"喷火龙Y石",play:"晴天队高速特攻手，爆发力出众"},
-    {name:"路卡利欧",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png",habit:"感知波动的能力极强，拥有严格的武士精神。自律且勇敢，擅长近身格斗，速度和力量结合完美，忠诚度极高。",nature:"固执",ability:"不屈之心",moves:"近身战+波导弹+剑舞+神速",item:"超级石",play:"高速双刀手，强化后收割全场"},
-    {name:"耿鬼",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png",habit:"神出鬼没，擅长潜入阴影中捉弄他人。身形虚幻难以被物理攻击命中，诡计多端，偏爱用异常状态干扰对手。",nature:"胆小",ability:"诅咒身躯",moves:"影子球+污泥波+催眠术+诡计",item:"超级石",play:"高速控场手，依靠异常状态打乱对手节奏"},
-    {name:"水箭龟",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",habit:"背部的炮台可以高压喷水，水陆两栖。性格冷静沉稳，擅长防御与远程牵制，是非常可靠的团队辅助兼输出。",nature:"保守",ability:"激流",moves:"水炮+冰冻光束+高速旋转+打雷",item:"超级石",play:"水系清钉手，兼顾输出与功能"},
-    {name:"妙蛙花",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",habit:"背上的花草伴随一生，依靠阳光进行光合作用。性情慵懒温和，擅长场地与续航类技能，晴天环境下实力大增。",nature:"大胆",ability:"叶绿素",moves:"花瓣舞+污泥炸弹+光合作用+催眠粉",item:"超级石",play:"晴天队辅助，站场续航能力优秀"},
-    {name:"甲贺忍蛙",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/658.png",habit:"身手如同忍者一般敏捷，行动悄无声息。擅长水系与恶系招式，战术灵活，主打高速突袭、一击脱离。",nature:"胆小",ability:"变幻自在",moves:"水手里剑+冰冻光束+恶之波动+水炮",item:"生命玉",play:"高速收割手，属性多变灵活打击"},
-    {name:"胡地",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/65.png",habit:"大脑异常发达，念力强大。身体轻盈速度极快，几乎不进行近身搏斗，全程依靠精神力量远程作战。",nature:"胆小",ability:"同步",moves:"精神强念+影子球+冥想+戏法",item:"超级石",play:"极限高速特攻，快速击杀脆皮"},
-    {name:"巨钳螳螂",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/212.png",habit:"前肢化为坚硬巨钳，攻防兼备。行动稳健，擅长利用先手招式抢先攻击，金属躯体抵御大部分物理伤害。",nature:"固执",ability:"技术高手",moves:"子弹拳+剑舞+羽栖+十字剪",item:"超级石",play:"先制收割，强化后压制全场"},
-    {name:"卡比兽",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png",habit:"终日嗜睡，食量惊人。身躯庞大防御力拉满，睡醒后战斗力凶猛，擅长原地强攻、以力破巧。",nature:"固执",ability:"厚脂肪",moves:"泰山压顶+咬碎+腹鼓+睡觉",item:"剩饭",play:"肉盾强攻，腹鼓后爆发毁天灭地"},
-    {name:"美纳斯",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/350.png",habit:"被誉为最美的宝可梦，栖息于清澈湖泊。性格温婉，遭遇负面状态时反而会变得更强，擅长持续消耗作战。",nature:"沉着",ability:"神秘鳞片",moves:"热水+冰冻光束+自我再生+迷惑",item:"剩饭",play:"特防消耗盾，回血续航拉扯对手"},
-    {name:"波士可多拉",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/306.png",habit:"全身覆盖厚重铠甲，偏爱险峻山地。防御力登峰造极，哪怕受到致命攻击也能勉强存活，是顶级物理坦克。",nature:"固执",ability:"坚硬",moves:"铁尾+地震+剑舞+岩崩",item:"超级石",play:"纯物防坦克，可抗可打"},
-    {name:"天蝎王",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/472.png",habit:"擅长在悬崖峭壁活动，依靠毒素维持状态。战术刁钻，利用中毒效果配合续航技能，不断和对手周旋消耗。",nature:"爽朗",ability:"毒疗",moves:"地震+剑舞+守住+毒击",item:"剧毒珠",play:"无限续航消耗，站场能力极强"},
-    {name:"蜥蜴王",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/254.png",habit:"生活在茂密丛林，动作迅捷灵活。阳光之下速度大幅提升，依靠敏捷的身法打出连续攻击。",nature:"爽朗",ability:"叶绿素",moves:"叶刃+地震+剑舞+高速移动",item:"超级石",play:"晴天高速物攻手，机动能力出色"},
-    {name:"电击魔兽",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/466.png",habit:"体内流淌强大电流，接触电能后会变得兴奋好动。力量十足，电系物理招式威力强劲。",nature:"固执",ability:"电气引擎",moves:"雷电拳+地震+剑舞+蛮力",item:"生命玉",play:"电系高速物攻手，打击面优秀"},
-    {name:"仙子伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/700.png",habit:"体态柔美，周身萦绕妖精之力。性格友善，专门克制凶暴的龙系宝可梦，是龙系宝可梦的天然克星。",nature:"内敛",ability:"妖精皮肤",moves:"月亮之力+精神冲击+冥想+吸取之吻",item:"妖精石板",play:"龙系天敌，特攻稳定强化"},
-    {name:"乘龙",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/131.png",habit:"栖息于冰冷海域，性情温顺，常载人渡海。叫声悠远，血量厚实，偏向辅助与范围攻击。",nature:"内敛",ability:"储水",moves:"冲浪+冰冻光束+打雷+唱歌",item:"剩饭",play:"辅助控场，血量充足适合站场"},
-    {name:"水晶灯火灵",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/609.png",habit:"由灵魂与火焰构成，体内燃烧幽冥之火。不怕火系招式，擅长持续强化、用特殊招式焚烧对手。",nature:"内敛",ability:"引火",moves:"喷射火焰+影子球+冥想+能量球",item:"剩饭",play:"特攻炮台，免疫火系招式"},
-    {name:"沙漠蜻蜓",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/330.png",habit:"终生生活在沙漠地带，漂浮于地面之上，不会受到地面招式攻击。行动轻盈，适应干旱环境。",nature:"爽朗",ability:"浮游",moves:"地震+龙爪+剑舞+大字爆炎",item:"剩饭",play:"免疫地面系，输出稳定灵活"},
-    {name:"艾路雷朵",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/475.png",habit:"如同剑士一般优雅战斗，正义感极强。面对邪恶属性的对手会斗志大增，近战招式凌厉果断。",nature:"固执",ability:"正义之心",moves:"近身战+精神利刃+剑舞+神速",item:"超级石",play:"恶系克星，近战爆发强悍"},
-    {name:"麻麻鳗鱼王",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/604.png",habit:"身躯细长如鳗鱼，栖息于泥泞水域。全身布满电流，没有四肢却行动灵活，电系强力物攻手。",nature:"固执",ability:"漂浮",moves:"雷电拳+咬碎+剑舞+地震",item:"讲究头带",play:"无弱点优势，物理输出稳定"},
-    {name:"坚果哑铃",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/598.png",habit:"全身布满尖刺，扎根地面不动。防御极高，擅长反伤对手，草+钢系经典物防盾。",nature:"大胆",ability:"铁刺",moves:"强力鞭打+陀螺球+铁壁+寄生种子",item:"剩饭",play:"物防核心，反伤+续航干扰"},
-    {name:"龙王蝎",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/452.png",habit:"毒与虫结合的凶暴宝可梦，栖息于阴暗岩壁。外壳坚硬，毒素剧烈，擅长游击作战。",nature:"爽朗",ability:"甲虫盔甲",moves:"毒十字+十字剪+剑舞+高速移动",item:"讲究围巾",play:"高速毒虫物攻手，克制妖精系"},
-    {name:"夜黑魔人",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/477.png",habit:"由亡灵凝聚而成，身躯庞大厚重。行动缓慢但防御无敌，擅长阻挡对手进攻、干扰节奏。",nature:"大胆",ability:"压力",moves:"暗影拳+地震+铁壁+戏法",item:"剩饭",play:"纯耐久盾牌，拖延对手战术"},
-    {name:"罗丝雷朵",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/407.png",habit:"周身长满毒玫瑰，花香暗藏剧毒。姿态优美，远程特攻能力出色，擅长用毒素消耗敌人。",nature:"胆小",ability:"自然恢复",moves:"污泥炸弹+能量球+催眠粉+毒炸弹",item:"讲究眼镜",play:"高速毒草特攻，异常状态干扰"},
-    {name:"暴雪王",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/460.png",habit:"栖息于雪山之巅，现身便会卷起暴风雪。身躯庞大，冰系场地核心，攻防均衡。",nature:"大胆",ability:"降雪",moves:"暴风雪+木槌+铁壁+羽栖",item:"剩饭",play:"雪天队发起者，耐久输出一体"},
-    {name:"姆克鹰",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/398.png",habit:"成群结队在空中翱翔，性情勇猛好斗。飞行速度极快，近战冲撞威力惊人。",nature:"爽朗",ability:"威吓",moves:"勇鸟猛攻+近身战+剑舞+高速移动",item:"生命玉",play:"高速飞行物攻，爆发极高"},
-    {name:"电击兽",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/125.png",habit:"全身电光缭绕，性格活泼好动。近距离电击威力强悍，经典电系主力。",nature:"固执",ability:"静电",moves:"雷电拳+十万伏特+剑舞+近身战",item:"生命玉",play:"电系近战输出，玩法灵活"},
-    {name:"鸭嘴炎兽",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/467.png",habit:"体内流淌岩浆，体温极高。火系特攻强者，周身热浪可以灼伤靠近的对手。",nature:"内敛",ability:"火焰身躯",moves:"大字爆炎+喷射火焰+冥想+能量球",item:"讲究眼镜",play:"火系远程炮台，打击面广"},
-    {name:"大钢蛇",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/208.png",habit:"身躯如钢铁长蛇，在地底穿行。外壳坚硬无比，物理防御顶尖，行动稳重缓慢。",nature:"大胆",ability:"坚硬",moves:"铁尾+地震+岩崩+铁壁",item:"剩饭",play:"老牌物理盾牌，抗性优秀"},
-    {name:"大甲",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/127.png",habit:"巨大虫钳威力十足，栖息于森林之中。性格好斗，近战爆发力极强。",nature:"爽朗",ability:"怪力钳",moves:"十字剪+近身战+剑舞+高速移动",item:"超级石",play:"高速虫系物攻，收割能力强"},
-    {name:"赫拉克罗斯",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/214.png",habit:"头上长有巨大犄角，力气惊人。喜欢吸食树汁，格斗+虫系经典强攻选手。",nature:"爽朗",ability:"虫之预感",moves:"近身战+十字剪+剑舞+岩崩",item:"讲究头带",play:"经典强攻手，打击面优质"},
-    {name:"三合一磁怪",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/82.png",habit:"三只小磁怪组合而成，磁场强大。悬浮在空中，电+钢系抗性极佳，特攻稳定。",nature:"内敛",ability:"浮游",moves:"十万伏特+加农光炮+冥想+电磁波",item:"讲究眼镜",play:"电钢特攻手，干扰+输出兼备"},
-    {name:"顽皮雷弹",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/101.png",habit:"球形身躯布满电流，性格急躁。速度极快，擅长自爆与高速干扰战术。",nature:"胆小",ability:"静电",moves:"十万伏特+自爆+高速移动+电磁波",item:"讲究围巾",play:"高速干扰手，自爆战术核心"},
-    {name:"隆隆岩",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/76.png",habit:"全身由岩石构成，体型敦实。地面+岩石系厚盾，擅长坚守阵地、反伤对手。",nature:"大胆",ability:"坚硬",moves:"地震+岩崩+自爆+铁壁",item:"剩饭",play:"地面岩石耐久盾，可抗可自爆"},
-    {name:"椰蛋树",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/103.png",habit:"长有多个头部，思维杂乱。栖息于热带丛林，草+超能力系远程输出。",nature:"内敛",ability:"叶绿素",moves:"精神强念+能量球+冥想+大爆炸",item:"讲究眼镜",play:"晴天特攻手，打法多变"},
-    {name:"霸王花",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/45.png",habit:"巨大花朵散发浓郁香气，部分香气带有剧毒。草系异常状态大师，擅长消耗。",nature:"大胆",ability:"叶绿素",moves:"污泥炸弹+能量球+催眠粉+寄生种子",item:"剩饭",play:"草系消耗辅助，控场能力强"},
-    {name:"风速狗",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/59.png",habit:"外形如烈焰神犬，气质高贵。火系全能选手，攻防速均衡，人气极高。",nature:"爽朗",ability:"引火",moves:"大字爆炎+神速+剑舞+近身战",item:"讲究头带",play:"火系全能物攻手，泛用性极强"},
-    {name:"布鲁皇",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/210.png",habit:"外形凶悍的妖精系宝可梦，性格护短。身躯健壮，攻防均衡，冷门强力选手。",nature:"大胆",ability:"魅惑身躯",moves:"魔法闪耀+咬碎+铁壁+吸取拳",item:"剩饭",play:"妖精系耐久手，克制龙系"},
-    {name:"麒麟奇",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/203.png",habit:"前后各有一颗头颅，视野全方位。超能力+一般系，速度较快，游击型选手。",nature:"胆小",ability:"精神力",moves:"精神强念+戏法+高速移动+打雷",item:"讲究围巾",play:"高速干扰特攻，灵活拉扯"},
-    {name:"顿甲",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/231.png",habit:"身披厚重铠甲，擅长滚动撞击。地面系厚血物攻手，耐力十足。",nature:"固执",ability:"坚硬",moves:"地震+滚动+剑舞+岩崩",item:"剩饭",play:"地面系强攻盾，能抗能打"},
-    {name:"大奶罐",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/241.png",habit:"性情温顺的奶牛宝可梦，产出营养鲜奶。普通系纯耐久，续航与辅助能力出色。",nature:"大胆",ability:"厚脂肪",moves:"吸取拳+治愈铃声+铁壁+睡觉",item:"剩饭",play:"团队续航辅助，解除异常状态"},
-    {name:"太阳伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/196.png",habit:"沐浴阳光进化而成，毛发闪耀金光。超能力系高速特攻，姿态优雅。",nature:"胆小",ability:"精神力",moves:"精神强念+影子球+冥想+高速移动",item:"讲究眼镜",play:"高速超能力特攻，强化收割"},
-    {name:"月亮伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/197.png",habit:"伴随月光进化，毛色漆黑。恶系纯耐久干扰盾，擅长用异常状态折磨对手。",nature:"大胆",ability:"同步",moves:"欺诈+哈欠+月光+剧毒",item:"剩饭",play:"恶系消耗盾，顶级干扰选手"},
-    {name:"叶伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/470.png",habit:"贴近草木进化，周身环绕绿叶。草系高速物攻，身法灵活。",nature:"爽朗",ability:"叶绿素",moves:"叶刃+剑舞+高速移动+咬碎",item:"讲究头带",play:"晴天草系物攻，机动灵活"},
-    {name:"冰伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/471.png",habit:"接触寒冰进化，全身覆霜。冰系特攻手，寒气可以冻结对手。",nature:"内敛",ability:"降雪",moves:"冰冻光束+暴风雪+冥想+影子球",item:"讲究眼镜",play:"雪天特攻核心，压制龙系"},
-    {name:"雷伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/135.png",habit:"雷电注入体内进化，速度冠绝伊布家族。电系高速游击选手。",nature:"胆小",ability:"静电",moves:"十万伏特+打雷+高速移动+电磁波",item:"讲究围巾",play:"电系高速骚扰，控场一流"},
-    {name:"火伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/136.png",habit:"火焰包裹身躯，热情好斗。火系物攻手，爆发力不俗。",nature:"固执",ability:"引火",moves:"闪焰冲锋+近身战+剑舞+神速",item:"生命玉",play:"火系近战爆发，简单暴力"},
-    {name:"水伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/134.png",habit:"体液柔软如水，擅长在水中游动。水系耐久特攻，续航优秀。",nature:"沉着",ability:"储水",moves:"水炮+冰冻光束+自我再生+冥想",item:"剩饭",play:"水系特防盾，持续站场输出"}
+    {name:"Mega烈空坐",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/384.png",habit:"翱翔于臭氧层之中，性情高傲且极具领地意识。Mega后突破天气锁，战力碾压一级神，天空霸主。",nature:"爽朗",ability:"德尔塔气流",moves:"画龙点睛+神速+地震+龙舞",item:"烈空坐超级石",play:"龙舞强化推队，版本唯一真神"},
+    {name:"Mega超梦X",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",habit:"人造宝可梦巅峰，Mega X后转为超强物攻手，力量匹敌创世神，性格孤傲好战。",nature:"固执",ability:"不屈之心",moves:"近身战+精神冲击+剑舞+神速",item:"超梦进化石X",play:"最强物攻手，剑舞后一穿六"},
+    {name:"Mega超梦Y",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",habit:"人造宝可梦巅峰，Mega Y后特攻冠绝全宝可梦，速度极快，智商极高。",nature:"胆小",ability:"压迫感",moves:"精神冲击+影子球+冥想+波导弹",item:"超梦进化石Y",play:"最强特攻手，高速冥想碾压"},
+    {name:"原始固拉多",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/383.png",habit:"陆地创世神，原始回归后日照永久，物攻爆炸，性格暴躁，与盖欧卡死敌。",nature:"固执",ability:"终结之地",moves:"断崖之剑+闪焰冲锋+剑舞+地震",item:"炽热岩石",play:"晴天队核心，物理爆发天花板"},
+    {name:"原始盖欧卡",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/382.png",habit:"海洋创世神，原始回归后降雨永久，特攻拉满，操控海洋，与固拉多死敌。",nature:"内敛",ability:"始源之海",moves:"水炮+打雷+冰冻光束+冥想",item:"潮湿岩石",play:"雨天队核心，特攻压制力无解"},
+    {name:"帕路奇亚",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/484.png",habit:"掌控空间的传说宝可梦，空间之神，性格冷静威严，能扭曲空间，战力顶级。",nature:"内敛",ability:"空间扭曲",moves:"亚空切断+龙之波动+水炮+冥想",item:"生命玉",play:"空间队核心，特攻压制极强"},
+    {name:"帝牙卢卡",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/483.png",habit:"掌控时间的传说宝可梦，时间之神，身躯如钢铁巨龙，能操控时间，攻防均衡。",nature:"大胆",ability:"时间扭曲",moves:"时光咆哮+金属爪+龙尾+铁壁",item:"剩饭",play:"耐久站场，干扰+输出一体"},
+    {name:"骑拉帝纳",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/487.png",habit:"反转世界之主，掌管生死边界，外形诡异，战力凶悍，性格孤僻，极少现世。",nature:"固执",ability:"漂浮",moves:"暗影爪+龙之俯冲+地震+剑舞",item:"突击背心",play:"高速物攻收割，打击面广泛"},
+    {name:"酋雷姆",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/646.png",habit:"冰龙传说宝可梦，可融合雷希拉姆/捷克罗姆变身黑白酋雷姆，战力暴涨，冰龙系天花板。",nature:"爽朗",ability:"冰冻皮肤",moves:"冰冻世界+龙爪+地震+剑舞",item:"讲究围巾",play:"高速爆发，克制龙系主流"},
+    // 11-30：二级神+究极异兽+准神（对战T0/T1）
+    {name:"凤王",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/250.png",habit:"铃铃塔神鸟，七彩火焰，复活生命，二级神，再生力极强，站场续航无解。",nature:"大胆",ability:"再生力",moves:"圣火+神鸟猛击+冥想+羽栖",item:"剩饭",play:"续航强化特攻手，站场能力顶级"},
+    {name:"洛奇亚",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/249.png",habit:"海洋守护神，安定风暴，二级神，压力特性，全能耐久盾，干扰+续航一体。",nature:"大胆",ability:"压力",moves:"空气爆炸+精神冲击+羽栖+冥想",item:"剩饭",play:"全能耐久盾，干扰续航兼备"},
+    {name:"无极汰那",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/890.png",habit:"伽勒尔传说，毒龙系，极巨化源头，种族值1125，设定顶级战力。",nature:"内敛",ability:"极巨化",moves:"无极光束+龙息+毒击+冥想",item:"生命玉",play:"极巨化核心，特攻爆炸"},
+    {name:"奈克洛兹玛",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/800.png",habit:"光辉大神，究极空间统治者，可融合日月神，战力暴涨，龙+超能力系。",nature:"爽朗",ability:"棱镜装甲",moves:"光子喷涌+龙爪+剑舞+地震",item:"讲究头带",play:"融合形态战力天花板"},
+    {name:"基格尔德",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/718.png",habit:"秩序之神，完全体形态，种族值708，地面+龙系，攻防均衡，控场极强。",nature:"均衡",ability:"群聚变形",moves:"核心惩罚者+龙爪+地震+剑舞",item:"剩饭",play:"完全体全能主力，控场+输出"},
+    {name:"烈咬陆鲨",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/445.png",habit:"准神天花板，龙+地面，沙暴队核心，Mega后物攻爆炸，速度快，打击面广。",nature:"爽朗",ability:"沙隐",moves:"地震+龙爪+剑舞+咬碎",item:"超级石",play:"沙暴队强力物攻手，速度攻击兼备"},
+    {name:"班吉拉",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/248.png",habit:"准神，岩石+恶，扬沙特性，沙暴队发起者，Mega后攻防一体，压制力强。",nature:"固执",ability:"扬沙",moves:"石刃+地震+龙爪+剑舞",item:"超级石",play:"沙暴队发起者，攻防一体主力"},
+    {name:"快龙",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png",habit:"初代准神，龙+飞行，多重鳞片，全能型，能打能抗能回血，泛用性拉满。",nature:"爽朗",ability:"多重鳞片",moves:"龙爪+地震+羽栖+雷电拳",item:"剩饭",play:"全能主力，泛用性拉满"},
+    {name:"暴飞龙",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/373.png",habit:"准神，龙+飞行，威吓特性，Mega后龙舞强化推队，泛用性极强。",nature:"爽朗",ability:"威吓",moves:"龙爪+地震+龙舞+大字爆炎",item:"超级石",play:"龙舞强化推队，泛用性极强"},
+    {name:"巨金怪",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/376.png",habit:"准神，钢+超能力，净体特性，Mega后物攻爆炸，免疫负面，钢系核心。",nature:"固执",ability:"净体",moves:"彗星拳+子弹拳+地震+臂锤",item:"超级石",play:"钢系物攻主力，免疫负面状态"},
+    {name:"三头龙",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/635.png",habit:"准神，恶+龙，浮游特性，高速特攻手，打击面全面，诡计强化后无解。",nature:"胆小",ability:"浮游",moves:"恶之波动+龙之波动+大字爆炎+大地之力",item:"生命玉",play:"高速特攻手，打击面全面"},
+    {name:"土地云",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/645.png",habit:"二级神，地面+飞行，威吓特性，地面系物理核心，爆发极高，剑舞强化推队。",nature:"固执",ability:"威吓",moves:"地震+蛮力+岩崩+剑舞",item:"讲究头带",play:"地面系物理核心，爆发极高"},
+    {name:"雷电云",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/642.png",habit:"二级神，电+飞行，恶作剧之心，高速干扰+特攻输出，控场能力强。",nature:"胆小",ability:"恶作剧之心",moves:"十万伏特+空气斩+能量球+诡计",item:"讲究眼镜",play:"高速干扰+特攻输出"},
+    {name:"龙卷云",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/641.png",habit:"二级神，飞行，恶作剧之心，高速骚扰，暴风+诡计，控场一流。",nature:"胆小",ability:"恶作剧之心",moves:"空气爆炸+暴风+诡计+高速移动",item:"讲究围巾",play:"高速骚扰型选手"},
+    {name:"哲尔尼亚斯",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/716.png",habit:"二级神，妖精系，妖精气场，妖精系核心，强化+续航一体，克制龙系。",nature:"内敛",ability:"妖精气场",moves:"月爆+大地之力+冥想+吸取之吻",item:"剩饭",play:"妖精系核心，强化续航一体"},
+    {name:"伊裴尔塔尔",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/717.png",habit:"二级神，恶+飞行，暗黑气场，高速物攻收割，压制续航型宝可梦。",nature:"爽朗",ability:"暗黑气场",moves:"恶之波动+暴风+剑舞+欺诈",item:"生命玉",play:"高速物攻收割，压制续航型"},
+    {name:"盖诺赛克特",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/649.png",habit:"究极异兽，虫+钢，下载特性，高速特攻炮台，打击面全面，射速极快。",nature:"胆小",ability:"下载",moves:"高科技光炮+虫鸣+冰冻光束+十万伏特",item:"讲究眼镜",play:"高速特攻炮台，属性打击全面"},
+    {name:"毕力吉翁",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/640.png",habit:"三圣剑之一，格斗+草，正义之心，高速格斗输出，剑舞+高速移动。",nature:"爽朗",ability:"正义之心",moves:"近战拍打+叶刃+剑舞+高速移动",item:"讲究围巾",play:"高速格斗输出"},
+    {name:"代拉基翁",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/639.png",habit:"三圣剑之一，格斗+岩石，正义之心，攻防兼备物理战士，岩崩+近战拍打。",nature:"固执",ability:"正义之心",moves:"岩崩+近战拍打+剑舞+地震",item:"突击背心",play:"攻防兼备物理战士"},
+    {name:"勾帕路翁",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/638.png",habit:"三圣剑领袖，格斗+钢，正义之心，耐久干扰+续航，团队核心。",nature:"大胆",ability:"正义之心",moves:"近战拍打+金属爪+铁壁+吸取拳",item:"剩饭",play:"耐久干扰续航格斗手"},
+    // 31-60：热门Mega+高使用率主力（对战OU级）
+    {name:"雷希拉姆",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/643.png",habit:"白龙传说，龙+火，涡轮火焰，火系特攻天花板，青色火焰+冥想。",nature:"内敛",ability:"涡轮火焰",moves:"青色火焰+龙之波动+冥想+大字爆炎",item:"讲究眼镜",play:"火系特攻天花板之一"},
+    {name:"捷克罗姆",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/644.png",habit:"黑龙传说，龙+电，兆级电压，龙电物攻核心，雷击+剑舞。",nature:"固执",ability:"兆级电压",moves:"雷击+龙爪+剑舞+蛮力",item:"讲究头带",play:"龙电物攻核心，打击面强势"},
+    {name:"玛机雅娜",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/762.png",habit:"千年人造人偶，钢+妖精，魂心特性，团队辅助核心，强化队友。",nature:"大胆",ability:"魂心",moves:"吸取之吻+金属音+铁壁+魔法闪耀",item:"剩饭",play:"团队辅助核心，强化队友能力"},
+    {name:"银伴战兽",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/800.png",habit:"AR系统，多属性攻击，百变战术手，灵活适配阵容，均衡型。",nature:"均衡",ability:"AR系统",moves:"多属性攻击+神速+冥想+铁壁",item:"生命玉",play:"百变战术手，灵活适配阵容"},
+    {name:"沙奈朵",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/282.png",habit:"超能+妖精，同步特性，Mega后特攻爆炸，龙系克星，稳定输出。",nature:"内敛",ability:"同步",moves:"月亮之力+精神强念+冥想+影子球",item:"超级石",play:"龙系克星，特攻稳定可强化"},
+    {name:"七夕青鸟",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/334.png",habit:"龙+飞行，自然恢复，Mega后高耐久肉盾，持续站场干扰。",nature:"大胆",ability:"自然恢复",moves:"龙星群+月亮之力+羽栖+暴风",item:"超级石",play:"高耐久肉盾辅助，持续站场干扰"},
+    {name:"喷火龙Y",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",habit:"火+飞行，太阳之力，Mega Y后高速特攻手，晴天队核心，爆发力强。",nature:"胆小",ability:"太阳之力",moves:"热风+空气斩+阳光烈焰+大字爆炎",item:"喷火龙Y石",play:"晴天队高速特攻手，爆发力出众"},
+    {name:"路卡利欧",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png",habit:"格斗+钢，不屈之心，Mega后高速双刀手，波导弹+近身战，收割全场。",nature:"固执",ability:"不屈之心",moves:"近身战+波导弹+剑舞+神速",item:"超级石",play:"高速双刀手，强化后收割全场"},
+    {name:"耿鬼",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png",habit:"鬼+毒，诅咒身躯，Mega后高速控场手，催眠+诡计，打乱对手节奏。",nature:"胆小",ability:"诅咒身躯",moves:"影子球+污泥波+催眠术+诡计",item:"超级石",play:"高速控场手，靠异常打乱节奏"},
+    {name:"水箭龟",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",habit:"水，激流特性，Mega后水系清钉手，兼顾输出与功能，水炮+冰冻光束。",nature:"保守",ability:"激流",moves:"水炮+冰冻光束+高速旋转+打雷",item:"超级石",play:"水系清钉手，兼顾输出与功能"},
+    {name:"妙蛙花",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",habit:"草+毒，叶绿素，Mega后晴天队辅助，站场续航优秀，光合作用+催眠粉。",nature:"大胆",ability:"叶绿素",moves:"花瓣舞+污泥炸弹+光合作用+催眠粉",item:"超级石",play:"晴天队辅助，站场续航能力优秀"},
+    {name:"甲贺忍蛙",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/658.png",habit:"水+恶，变幻自在，高速收割手，水手里剑+冰冻光束，属性多变。",nature:"胆小",ability:"变幻自在",moves:"水手里剑+冰冻光束+恶之波动+水炮",item:"生命玉",play:"高速收割手，属性多变灵活打击"},
+    {name:"胡地",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/65.png",habit:"超能，同步特性，Mega后极限高速特攻，快速击杀脆皮，冥想+影子球。",nature:"胆小",ability:"同步",moves:"精神强念+影子球+冥想+戏法",item:"超级石",play:"极限高速特攻，快速击杀脆皮"},
+    {name:"巨钳螳螂",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/212.png",habit:"虫+钢，技术高手，Mega后先制收割，子弹拳+剑舞，压制全场。",nature:"固执",ability:"技术高手",moves:"子弹拳+剑舞+羽栖+十字剪",item:"超级石",play:"先制收割，强化后压制全场"},
+    {name:"卡比兽",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png",habit:"一般，厚脂肪，肉盾强攻，腹鼓后爆发毁天灭地，睡觉+泰山压顶。",nature:"固执",ability:"厚脂肪",moves:"泰山压顶+咬碎+腹鼓+睡觉",item:"剩饭",play:"肉盾强攻，腹鼓后爆发毁天灭地"},
+    {name:"美纳斯",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/350.png",habit:"水，神秘鳞片，特防消耗盾，回血续航拉扯对手，自我再生+热水。",nature:"沉着",ability:"神秘鳞片",moves:"热水+冰冻光束+自我再生+迷惑",item:"剩饭",play:"特防消耗盾，回血续航拉扯对手"},
+    {name:"波士可多拉",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/306.png",habit:"钢+岩石，坚硬特性，Mega后纯物防坦克，可抗可打，铁尾+剑舞。",nature:"固执",ability:"坚硬",moves:"铁尾+地震+剑舞+岩崩",item:"超级石",play:"纯物防坦克，可抗可打"},
+    {name:"天蝎王",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/472.png",habit:"地面+飞行，毒疗特性，无限续航消耗，剧毒珠+守住，站场能力极强。",nature:"爽朗",ability:"毒疗",moves:"地震+剑舞+守住+毒击",item:"剧毒珠",play:"无限续航消耗，站场能力极强"},
+    {name:"蜥蜴王",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/254.png",habit:"草，叶绿素，Mega后晴天高速物攻手，机动能力出色，叶刃+剑舞。",nature:"爽朗",ability:"叶绿素",moves:"叶刃+地震+剑舞+高速移动",item:"超级石",play:"晴天高速物攻手，机动能力出色"},
+    {name:"电击魔兽",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/466.png",habit:"电，电气引擎，电系高速物攻手，打击面优秀，雷电拳+剑舞。",nature:"固执",ability:"电气引擎",moves:"雷电拳+地震+剑舞+蛮力",item:"生命玉",play:"电系高速物攻手，打击面优秀"},
+    {name:"仙子伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/700.png",habit:"妖精，妖精皮肤，龙系天敌，特攻稳定强化，月亮之力+冥想。",nature:"内敛",ability:"妖精皮肤",moves:"月亮之力+精神冲击+冥想+吸取之吻",item:"妖精石板",play:"龙系天敌，特攻稳定强化"},
+    {name:"乘龙",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/131.png",habit:"水+冰，储水特性，辅助控场，血量充足适合站场，冲浪+唱歌。",nature:"内敛",ability:"储水",moves:"冲浪+冰冻光束+打雷+唱歌",item:"剩饭",play:"辅助控场，血量充足适合站场"},
+    {name:"水晶灯火灵",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/609.png",habit:"鬼+火，引火特性，特攻炮台，免疫火系招式，喷射火焰+冥想。",nature:"内敛",ability:"引火",moves:"喷射火焰+影子球+冥想+能量球",item:"剩饭",play:"特攻炮台，免疫火系招式"},
+    {name:"沙漠蜻蜓",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/330.png",habit:"龙+地面，浮游特性，免疫地面系，输出稳定灵活，地震+龙爪。",nature:"爽朗",ability:"浮游",moves:"地震+龙爪+剑舞+大字爆炎",item:"剩饭",play:"免疫地面系，输出稳定灵活"},
+    {name:"艾路雷朵",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/475.png",habit:"格斗+超能力，正义之心，恶系克星，近战爆发强悍，近身战+剑舞。",nature:"固执",ability:"正义之心",moves:"近身战+精神利刃+剑舞+神速",item:"超级石",play:"恶系克星，近战爆发强悍"},
+    {name:"麻麻鳗鱼王",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/604.png",habit:"电，漂浮特性，无弱点优势，物理输出稳定，雷电拳+剑舞。",nature:"固执",ability:"漂浮",moves:"雷电拳+咬碎+剑舞+地震",item:"讲究头带",play:"无弱点优势，物理输出稳定"},
+    {name:"坚果哑铃",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/598.png",habit:"草+钢，铁刺特性，物防核心，反伤+续航干扰，寄生种子+铁壁。",nature:"大胆",ability:"铁刺",moves:"强力鞭打+陀螺球+铁壁+寄生种子",item:"剩饭",play:"物防核心，反伤续航干扰"},
+    {name:"龙王蝎",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/452.png",habit:"毒+虫，甲虫盔甲，高速毒虫物攻手，克制妖精系，毒十字+剑舞。",nature:"爽朗",ability:"甲虫盔甲",moves:"毒十字+十字剪+剑舞+高速移动",item:"讲究围巾",play:"高速毒虫物攻手，克制妖精系"},
+    {name:"夜黑魔人",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/477.png",habit:"鬼，压力特性，纯耐久盾牌，拖延对手战术，暗影拳+铁壁。",nature:"大胆",ability:"压力",moves:"暗影拳+地震+铁壁+戏法",item:"剩饭",play:"纯耐久盾牌，拖延对手战术"},
+    {name:"罗丝雷朵",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/407.png",habit:"毒+草，自然恢复，高速毒草特攻，异常状态干扰，污泥炸弹+催眠粉。",nature:"胆小",ability:"自然恢复",moves:"污泥炸弹+能量球+催眠粉+毒炸弹",item:"讲究眼镜",play:"高速毒草特攻，异常状态干扰"},
+    // 61-100：强力常规+冷门强者（对战UU/NU级，绿宝石实用）
+    {name:"暴雪王",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/460.png",habit:"冰+草，降雪特性，雪天队发起者，耐久输出一体，暴风雪+木槌。",nature:"大胆",ability:"降雪",moves:"暴风雪+木槌+铁壁+羽栖",item:"剩饭",play:"雪天队发起者，耐久输出一体"},
+    {name:"姆克鹰",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/398.png",habit:"一般+飞行，威吓特性，高速飞行物攻，爆发极高，勇鸟猛攻+剑舞。",nature:"爽朗",ability:"威吓",moves:"勇鸟猛攻+近身战+剑舞+高速移动",item:"生命玉",play:"高速飞行物攻，爆发极高"},
+    {name:"电击兽",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/125.png",habit:"电，静电特性，电系近战输出，玩法灵活，雷电拳+剑舞。",nature:"固执",ability:"静电",moves:"雷电拳+十万伏特+剑舞+近身战",item:"生命玉",play:"电系近战输出，玩法灵活"},
+    {name:"鸭嘴炎兽",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/467.png",habit:"火，火焰身躯，火系远程炮台，打击面广，大字爆炎+冥想。",nature:"内敛",ability:"火焰身躯",moves:"大字爆炎+喷射火焰+冥想+能量球",item:"讲究眼镜",play:"火系远程炮台，打击面广"},
+    {name:"大钢蛇",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/208.png",habit:"钢+地面，坚硬特性，老牌物理盾牌，抗性优秀，铁尾+岩崩。",nature:"大胆",ability:"坚硬",moves:"铁尾+地震+岩崩+铁壁",item:"剩饭",play:"老牌物理盾牌，抗性优秀"},
+    {name:"大甲",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/127.png",habit:"虫，怪力钳，高速虫系物攻，收割能力强，十字剪+剑舞。",nature:"爽朗",ability:"怪力钳",moves:"十字剪+近身战+剑舞+高速移动",item:"超级石",play:"高速虫系物攻，收割能力强"},
+    {name:"赫拉克罗斯",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/214.png",habit:"虫+格斗，虫之预感，经典强攻手，打击面优质，近身战+剑舞。",nature:"爽朗",ability:"虫之预感",moves:"近身战+十字剪+剑舞+岩崩",item:"讲究头带",play:"经典强攻手，打击面优质"},
+    {name:"三合一磁怪",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/82.png",habit:"电+钢，浮游特性，电钢特攻手，干扰+输出兼备，十万伏特+冥想。",nature:"内敛",ability:"浮游",moves:"十万伏特+加农光炮+冥想+电磁波",item:"讲究眼镜",play:"电钢特攻手，干扰输出兼备"},
+    {name:"顽皮雷弹",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/101.png",habit:"电，静电特性，高速干扰手，自爆战术核心，十万伏特+自爆。",nature:"胆小",ability:"静电",moves:"十万伏特+自爆+高速移动+电磁波",item:"讲究围巾",play:"高速干扰手，自爆战术核心"},
+    {name:"隆隆岩",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/76.png",habit:"地面+岩石，坚硬特性，地面岩石耐久盾，可抗可自爆，地震+岩崩。",nature:"大胆",ability:"坚硬",moves:"地震+岩崩+自爆+铁壁",item:"剩饭",play:"地面岩石耐久盾，可抗可自爆"},
+    {name:"椰蛋树",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/103.png",habit:"草+超能力，叶绿素，晴天特攻手，打法多变，精神强念+能量球。",nature:"内敛",ability:"叶绿素",moves:"精神强念+能量球+冥想+大爆炸",item:"讲究眼镜",play:"晴天特攻手，打法多变"},
+    {name:"霸王花",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/45.png",habit:"草+毒，叶绿素，草系消耗辅助，控场能力强，污泥炸弹+催眠粉。",nature:"大胆",ability:"叶绿素",moves:"污泥炸弹+能量球+催眠粉+寄生种子",item:"剩饭",play:"草系消耗辅助，控场能力强"},
+    {name:"风速狗",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/59.png",habit:"火，引火特性，火系全能物攻手，泛用性极强，大字爆炎+剑舞。",nature:"爽朗",ability:"引火",moves:"大字爆炎+神速+剑舞+近身战",item:"讲究头带",play:"火系全能物攻手，泛用性极强"},
+    {name:"布鲁皇",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/210.png",habit:"妖精，魅惑身躯，妖精系耐久手，克制龙系，魔法闪耀+铁壁。",nature:"大胆",ability:"魅惑身躯",moves:"魔法闪耀+咬碎+铁壁+吸取拳",item:"剩饭",play:"妖精系耐久手，克制龙系"},
+    {name:"麒麟奇",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/203.png",habit:"超能力+一般，精神力，高速干扰特攻，灵活拉扯，精神强念+戏法。",nature:"胆小",ability:"精神力",moves:"精神强念+戏法+高速移动+打雷",item:"讲究围巾",play:"高速干扰特攻，灵活拉扯"},
+    {name:"顿甲",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/231.png",habit:"地面，坚硬特性，地面系强攻盾，能抗能打，地震+剑舞。",nature:"固执",ability:"坚硬",moves:"地震+滚动+剑舞+岩崩",item:"剩饭",play:"地面系强攻盾，能抗能打"},
+    {name:"大奶罐",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/241.png",habit:"一般，厚脂肪，团队续航辅助，解除异常状态，治愈铃声+睡觉。",nature:"大胆",ability:"厚脂肪",moves:"吸取拳+治愈铃声+铁壁+睡觉",item:"剩饭",play:"团队续航辅助，解除异常状态"},
+    {name:"太阳伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/196.png",habit:"超能力，精神力，高速超能力特攻，强化收割，精神强念+冥想。",nature:"胆小",ability:"精神力",moves:"精神强念+影子球+冥想+高速移动",item:"讲究眼镜",play:"高速超能力特攻，强化收割"},
+    {name:"月亮伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/197.png",habit:"恶，同步特性，恶系消耗盾，顶级干扰选手，欺诈+剧毒。",nature:"大胆",ability:"同步",moves:"欺诈+哈欠+月光+剧毒",item:"剩饭",play:"恶系消耗盾，顶级干扰选手"},
+    {name:"叶伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/470.png",habit:"草，叶绿素，晴天草系物攻，机动灵活，叶刃+剑舞。",nature:"爽朗",ability:"叶绿素",moves:"叶刃+剑舞+高速移动+咬碎",item:"讲究头带",play:"晴天草系物攻，机动灵活"},
+    {name:"冰伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/471.png",habit:"冰，降雪特性，雪天特攻核心，压制龙系，冰冻光束+冥想。",nature:"内敛",ability:"降雪",moves:"冰冻光束+暴风雪+冥想+影子球",item:"讲究眼镜",play:"雪天特攻核心，压制龙系"},
+    {name:"雷伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/135.png",habit:"电，静电特性，电系高速骚扰，控场一流，十万伏特+高速移动。",nature:"胆小",ability:"静电",moves:"十万伏特+打雷+高速移动+电磁波",item:"讲究围巾",play:"电系高速骚扰，控场一流"},
+    {name:"火伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/136.png",habit:"火，引火特性，火系近战爆发，简单暴力，闪焰冲锋+剑舞。",nature:"固执",ability:"引火",moves:"闪焰冲锋+近身战+剑舞+神速",item:"生命玉",play:"火系近战爆发，简单暴力"},
+    {name:"水伊布",img:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/134.png",habit:"水，储水特性，水系特防盾，持续站场输出，水炮+自我再生。",nature:"沉着",ability:"储水",moves:"水炮+冰冻光束+自我再生+冥想",item:"剩饭",play:"水系特防盾，持续站场输出"}
 ];
 
 let currentIndex = 0;
 const cardGrid = document.getElementById('cardGrid');
 const searchInput = document.getElementById('searchInput');
 
-// ---------- 评论持久化：localStorage ----------
+// 评论持久化：localStorage（按宝可梦名称存储，永久保存）
 let commentsData = JSON.parse(localStorage.getItem('pokemonComments')) || {};
-// 保存评论到本地
-function saveComments() {
-    localStorage.setItem('pokemonComments', JSON.stringify(commentsData));
-}
-// 渲染当前宝可梦的评论
+function saveComments() { localStorage.setItem('pokemonComments', JSON.stringify(commentsData)); }
 function renderComments() {
     const list = document.getElementById('commentList');
     list.innerHTML = '';
@@ -432,7 +425,6 @@ function renderComments() {
         list.appendChild(item);
     });
 }
-// 发表评论
 function addComment() {
     const t = document.getElementById('commentInput').value.trim();
     if (!t) return;
@@ -444,15 +436,13 @@ function addComment() {
     document.getElementById('commentInput').value = '';
 }
 
-// ---------- 卡片渲染：显示真实排名、绑定原数组索引 ----------
+// 卡片渲染：显示真实排名（原数组索引），绑定真实索引
 function renderCards(list) {
     cardGrid.innerHTML = '';
     list.forEach(item => {
-        // 找到该宝可梦在原数组里的真实索引（决定排名）
         const realIndex = pokemonData.findIndex(p => p.name === item.name);
         const card = document.createElement('div');
         card.className = 'card';
-        // 点击时传递真实索引，内容永远对应
         card.onclick = () => goToDetail(realIndex);
         card.innerHTML = `
             <div class="rank">TOP${realIndex + 1}</div>
@@ -463,10 +453,10 @@ function renderCards(list) {
     });
 }
 
-// 初始化渲染全部卡片
+// 初始化渲染全部100只
 renderCards(pokemonData);
 
-// ---------- 搜索：只过滤显示，不打乱原索引 ----------
+// 搜索：过滤显示，不打乱原排名
 searchInput.addEventListener('input', function(){
     const key = this.value.trim().toLowerCase();
     if(!key){
@@ -477,7 +467,7 @@ searchInput.addEventListener('input', function(){
     renderCards(filterList);
 });
 
-// ---------- 详情页：用真实索引取数据 ----------
+// 详情页：用真实索引取数据，内容永不串位
 function goToDetail(index) {
     currentIndex = index;
     const d = pokemonData[index];
@@ -489,9 +479,7 @@ function goToDetail(index) {
     document.getElementById('detailMoves').innerText = d.moves;
     document.getElementById('detailItem').innerText = d.item;
     document.getElementById('detailPlay').innerText = d.play;
-
-    renderComments(); // 加载该宝可梦的评论
-
+    renderComments();
     document.getElementById('homePage').classList.remove('active');
     document.getElementById('detailPage').classList.add('active');
 }
@@ -502,7 +490,7 @@ function goBack() {
     document.getElementById('homePage').classList.add('active');
 }
 
-// 背景音乐
+// 背景音乐：平淡舒缓，点击播放
 document.addEventListener('click', function play() {
     document.getElementById('bgm').play().catch(()=>{});
     document.removeEventListener('click', play);
